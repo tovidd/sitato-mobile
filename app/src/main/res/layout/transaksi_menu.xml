@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pegawai.Area.transaksi.Transaksi_menu">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/white"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button_transaksiSparepart"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_sparepart" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Sparepart"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/white"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button_transaksiJasaService"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_jasa_service" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jasa service"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginBottom="50dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:background="@color/white"
+                        android:layout_margin="5dp"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/button_transaksiSuratPerintahKerja"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:background="@mipmap/ic_sparepart" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Sparepart"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8pt" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/orange">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:background="@color/white"
+                        android:layout_margin="5dp"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/button_transaksiUbahStatusDanMenyelesaikan"
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:background="@mipmap/ic_supplier" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Supplier"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8pt" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

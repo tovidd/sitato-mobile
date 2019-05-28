@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "162410216195",
+    "firebase_url": "https://sitato-c4477.firebaseio.com",
+    "project_id": "sitato-c4477",
+    "storage_bucket": "sitato-c4477.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162410216195:android:ef3cf9a7295fe761",
+        "android_client_info": {
+          "package_name": "com.toviddd.sitato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162410216195-r2kidac3q5cl7ne0rdsn3glilc78b0d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpibSspFDl9DUH0v-DNxA5MZY7kBg8bO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162410216195-r2kidac3q5cl7ne0rdsn3glilc78b0d5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

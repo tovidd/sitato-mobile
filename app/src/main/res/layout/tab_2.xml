@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--translationZ utk bring in front-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="50dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/orange80"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView_searchSparepart_tab2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_search" />
+                    <EditText
+                        android:id="@+id/editText_searchSparepart_tab2"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.70"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white80"
+                        android:inputType="textFilter|text"
+                        android:hint="Pencarian.." />
+
+                    <TextView
+                        android:id="@+id/textView_deleteSearchSparepart_tab2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="15pt"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:textAlignment="center"
+                        android:text="X" />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!--hasil pencarian pelanggan-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinnerSorting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                style="@style/spinnerTheme"
+                android:minHeight="40dp">
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout_tab2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/nestedScrollView_tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:layout_marginTop="100dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recyclerView_Sparepart_tab2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                            </android.support.v7.widget.RecyclerView>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp" />
+                    </LinearLayout>
+                </android.support.v4.widget.NestedScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

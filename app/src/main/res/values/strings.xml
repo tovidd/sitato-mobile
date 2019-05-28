@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">SITATO</string>
+    <string name="tab_text_1">Informasi bengkel</string>
+    <string name="tab_text_2">Katalog sparepart</string>
+    <string name="tab_text_3">Cek histori transaksi</string>
+    <string name="action_login">Login pegawai</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_login">Login pegawai</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Kata sandi</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">Email tidak valid</string>
+    <string name="error_invalid_password">Sandi minimal 8 karakter</string>
+    <string name="error_incorrect_password">Sandi salah</string>
+    <string name="error_field_required">Username dan Sandi tidak boleh kosong</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="btnLoginPegawai">Login pegawai</string>
+
+    <!--area pegawai-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pegawai_main">PegawaiMainActivity</string>
+    <string name="action_gantiSandi">Ganti sandi</string>
+    <string name="action_logout">Logout</string>
+    <string name="pegawai_tab_text_1">Kelola Data</string>
+    <string name="pegawai_tab_text_2">Transaksi</string>
+    <string name="pegawai_tab_text_3">Laporan</string>
+
+    <!--lain lain-->
+    <string-array name="test">
+        <item>test 1</item>
+        <item>test 2</item>
+        <item>test 3</item>
+        <item>test 4</item>
+        <item>test 5</item>
+        <item>test 6</item>
+    </string-array>
+
+    <string name="fcm_tokem">FCM Token: %s</string>
+
+</resources>

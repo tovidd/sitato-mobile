@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.toviddd.sitato">
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo_atma_auto"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_pengadaan"></activity>
+        <activity android:name=".HistoriTransaksiPelangganDetil" />
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_tampil" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NotificationSparepart" />
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_sparepart" /> <!-- android:parentActivityName=".Pegawai.Area.PegawaiMainActivity"/> -->
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_jasaService" />
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_menu" />
+        <activity android:name=".Pegawai.Area.Kelola.data.Sparepart" />
+        <activity android:name=".Pegawai.Area.Kelola.data.Supplier" />
+        <activity android:name=".Pegawai.Area.Kelola.data.Pelanggan" />
+        <activity android:name=".Pegawai.Area.Kelola.data.Cabang" />
+        <activity android:name=".Pegawai.Area.Kelola.data.Kendaraan" />
+        <activity
+            android:name=".Pegawai.Area.PegawaiMainActivity"
+            android:label="@string/title_activity_pegawai_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+    </application>
+
+</manifest>
