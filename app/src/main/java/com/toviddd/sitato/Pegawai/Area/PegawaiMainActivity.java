@@ -81,6 +81,9 @@ public class PegawaiMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pegawai_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -142,104 +145,10 @@ public class PegawaiMainActivity extends AppCompatActivity {
         switch (id)
         {
             case R.id.menuItem_logout:
-//                SharedPreferences pref= getApplicationContext().getSharedPreferences(Helper.PREF_LOGIN_PEGAWAI, Context.MODE_PRIVATE);
-//                int id_pegawai_login= pref.getInt(Helper.ID_PEGAWAI_LOGIN, -1);
-//                int id_role_login= pref.getInt(Helper.ID_ROLE_LOGIN, -1);
-
-                FancyToast.makeText(PegawaiMainActivity.this, "Berhasil logout", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
-                PegawaiDAO pegawaiDAO= new PegawaiDAO(-1, -1);
-                Helper.pegawaiLoginSession(getApplicationContext(), pegawaiDAO);
-                Intent intent= new Intent(PegawaiMainActivity.this, MainActivity.class);
-                startActivity(intent);
+                logout();
                 break;
             case R.id.menuItem_gantiSandi:
-                SharedPreferences pref2= getApplicationContext().getSharedPreferences(Helper.PREF_LOGIN_PEGAWAI, Context.MODE_PRIVATE);
-                String username= pref2.getString(Helper.USERNAME_PEGAWAI_LOGIN, "");
-
-                LayoutInflater inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popUpView = inflater.inflate(R.layout.popup_window_ganti_password, null);
-                popupWindow = new PopupWindow(popUpView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
-                popupWindow.setBackgroundDrawable(new BitmapDrawable(null, ""));
-                popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
-                popupWindow.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
-
-                etUsername= popUpView.findViewById(R.id.et_username_gantiPassword);
-                etPasswordLama= popUpView.findViewById(R.id.et_passwordLama_gantiPassword);
-                etPasswordBaru= popUpView.findViewById(R.id.et_passwordBaru_gantiPassword);
-                etPasswordBaruKonfirmasi= popUpView.findViewById(R.id.et_passwordBaruKonfirmasi_gantiPassword);
-                btnGantiPassword= popUpView.findViewById(R.id.button_gantiPassword);
-                etUsername.setText(username);
-                etPasswordLama.setText("sukasuka");
-                etPasswordBaru.setText("sukasuka1");
-                etPasswordBaruKonfirmasi.setText("sukasuka");
-                etPasswordLama.requestFocus();
-                btnGantiPassword.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String uname, passLama, passBaru, passKonfirmasi;
-                        uname= etUsername.getText().toString();
-                        passLama= etPasswordLama.getText().toString();
-                        passBaru= etPasswordBaru.getText().toString();
-                        passKonfirmasi= etPasswordBaruKonfirmasi.getText().toString();
-
-                        if(passLama.isEmpty() || passBaru.isEmpty() || passKonfirmasi.isEmpty())
-                        {
-                            FancyToast.makeText(PegawaiMainActivity.this, "Semua kolom inputan harus terisi", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
-                        }
-                        else if(passLama.length()<8 || passLama.length()>16 || passBaru.length()<8 || passBaru.length()>16 || passKonfirmasi.length()<8 || passKonfirmasi.length()>16)
-                        {
-                            if(passLama.length()<8 || passLama.length()>16)
-                            {
-                                FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
-                            }
-                            else if(passBaru.length()<8 || passBaru.length()>16)
-                            {
-                                FancyToast.makeText(PegawaiMainActivity.this, "Sandi baru harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
-                            }
-                            else if(passLama.length()<8 || passLama.length()>16)
-                            {
-                                FancyToast.makeText(PegawaiMainActivity.this, "Sandi konfirmasi harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
-                            }
-                        }
-                        else if(!passBaru.equals(passKonfirmasi))
-                        {
-                            Log.d(TAG, "================> (" +passBaru +", " +passKonfirmasi +")");
-                            FancyToast.makeText(PegawaiMainActivity.this, "Sandi Konfirmasi tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
-                        }
-                        else
-                        {
-                            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-                            Retrofit retrofit = builder.build();
-                            PegawaiApiClient apiClient = retrofit.create(PegawaiApiClient.class);
-                            Call<PegawaiDAO> pegawaiCall = apiClient.requestGantiSandiPegawai(uname, passLama, passBaru);
-                            pegawaiCall.enqueue(new Callback<PegawaiDAO>() {
-                                @Override
-                                public void onResponse(Call<PegawaiDAO> call, Response<PegawaiDAO> response) {
-                                    if(response.code() == 200)
-                                    {
-                                        FancyToast.makeText(PegawaiMainActivity.this, "Berhasil ganti sandi", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
-                                    }
-                                    else
-                                    {
-                                        FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama salah/tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<PegawaiDAO> call, Throwable t) {
-                                    // FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama salah/tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
-                                    FancyToast.makeText(PegawaiMainActivity.this, "Berhasil ganti sandi", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
-                                    { //logout
-                                        PegawaiDAO pegawaiDAO= new PegawaiDAO(-1, -1);
-                                        Helper.pegawaiLoginSession(getApplicationContext(), pegawaiDAO);
-                                        Intent intent= new Intent(PegawaiMainActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
+                gantiSandi();
                 break;
         }
 
@@ -263,7 +172,7 @@ public class PegawaiMainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_pegawai_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            TextView textView= rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
@@ -300,7 +209,103 @@ public class PegawaiMainActivity extends AppCompatActivity {
 
     private void logout()
     {
+        FancyToast.makeText(PegawaiMainActivity.this, "Berhasil logout", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+        PegawaiDAO pegawaiDAO= new PegawaiDAO(-1, -1);
+        Helper.pegawaiLoginSession(getApplicationContext(), pegawaiDAO);
+        Intent intent= new Intent(PegawaiMainActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
+    }
 
+    private void gantiSandi()
+    {
+        SharedPreferences pref2= getApplicationContext().getSharedPreferences(Helper.PREF_LOGIN_PEGAWAI, Context.MODE_PRIVATE);
+        String username= pref2.getString(Helper.USERNAME_PEGAWAI_LOGIN, "");
+
+        LayoutInflater inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popUpView = inflater.inflate(R.layout.popup_window_ganti_password, null);
+        popupWindow = new PopupWindow(popUpView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable(null, ""));
+        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+        popupWindow.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
+
+        etUsername= popUpView.findViewById(R.id.et_username_gantiPassword);
+        etPasswordLama= popUpView.findViewById(R.id.et_passwordLama_gantiPassword);
+        etPasswordBaru= popUpView.findViewById(R.id.et_passwordBaru_gantiPassword);
+        etPasswordBaruKonfirmasi= popUpView.findViewById(R.id.et_passwordBaruKonfirmasi_gantiPassword);
+        btnGantiPassword= popUpView.findViewById(R.id.button_gantiPassword);
+        etUsername.setText(username);
+        etPasswordLama.setText("sukasuka");
+        etPasswordBaru.setText("sukasuka1");
+        etPasswordBaruKonfirmasi.setText("sukasuka");
+        etPasswordLama.requestFocus();
+        btnGantiPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uname, passLama, passBaru, passKonfirmasi;
+                uname= etUsername.getText().toString();
+                passLama= etPasswordLama.getText().toString();
+                passBaru= etPasswordBaru.getText().toString();
+                passKonfirmasi= etPasswordBaruKonfirmasi.getText().toString();
+
+                if(passLama.isEmpty() || passBaru.isEmpty() || passKonfirmasi.isEmpty())
+                {
+                    FancyToast.makeText(PegawaiMainActivity.this, "Semua kolom inputan harus terisi", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
+                }
+                else if(passLama.length()<8 || passLama.length()>16 || passBaru.length()<8 || passBaru.length()>16 || passKonfirmasi.length()<8 || passKonfirmasi.length()>16)
+                {
+                    if(passLama.length()<8 || passLama.length()>16)
+                    {
+                        FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
+                    }
+                    else if(passBaru.length()<8 || passBaru.length()>16)
+                    {
+                        FancyToast.makeText(PegawaiMainActivity.this, "Sandi baru harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
+                    }
+                    else if(passLama.length()<8 || passLama.length()>16)
+                    {
+                        FancyToast.makeText(PegawaiMainActivity.this, "Sandi konfirmasi harus 8 - 16 huruf/alfanumerik", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
+                    }
+                }
+                else if(!passBaru.equals(passKonfirmasi))
+                {
+                    Log.d(TAG, "================> (" +passBaru +", " +passKonfirmasi +")");
+                    FancyToast.makeText(PegawaiMainActivity.this, "Sandi Konfirmasi tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                }
+                else
+                {
+                    Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+                    Retrofit retrofit = builder.build();
+                    PegawaiApiClient apiClient = retrofit.create(PegawaiApiClient.class);
+                    Call<PegawaiDAO> pegawaiCall = apiClient.requestGantiSandiPegawai(uname, passLama, passBaru);
+                    pegawaiCall.enqueue(new Callback<PegawaiDAO>() {
+                        @Override
+                        public void onResponse(Call<PegawaiDAO> call, Response<PegawaiDAO> response) {
+                            if(response.code() == 200)
+                            {
+                                FancyToast.makeText(PegawaiMainActivity.this, "Berhasil ganti sandi", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                            }
+                            else
+                            {
+                                FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama salah/tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<PegawaiDAO> call, Throwable t) {
+                            // FancyToast.makeText(PegawaiMainActivity.this, "Sandi lama salah/tidak sesuai", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                            FancyToast.makeText(PegawaiMainActivity.this, "Berhasil ganti sandi", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                            { //logout
+                                PegawaiDAO pegawaiDAO= new PegawaiDAO(-1, -1);
+                                Helper.pegawaiLoginSession(getApplicationContext(), pegawaiDAO);
+                                Intent intent= new Intent(PegawaiMainActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public boolean isNetworkAvailable()

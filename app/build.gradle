@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-gcm:15.0.0'
     implementation 'org.apache.commons:commons-lang3:3.4' // initcap
     implementation 'net.gotev:uploadservice:2.1' // upload image
+    implementation 'com.android.support:customtabs:28.0.0' // fast custom web view
 
 //    implementation 'com.otaliastudios:zoomlayout:1.6.0' //zoom
     //implementation 'com.github.Commit451:ModalBottomSheetDialogFragment:1.1.0' //modal bottom

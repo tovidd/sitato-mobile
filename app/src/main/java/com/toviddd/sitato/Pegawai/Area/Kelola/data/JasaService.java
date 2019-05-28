@@ -23,9 +23,12 @@ import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.toviddd.sitato.Helper;
 import com.toviddd.sitato.Pegawai.Area.DAO.CabangDAO;
+import com.toviddd.sitato.Pegawai.Area.DAO.JasaServiceDAO;
 import com.toviddd.sitato.Pegawai.Area.DAO.PegawaiApiClient;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterCabang;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterCabangSearch;
+import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterJasaService;
+import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterJasaServiceSearch;
 import com.toviddd.sitato.Pegawai.Area.PegawaiMainActivity;
 import com.toviddd.sitato.R;
 
@@ -42,26 +45,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class JasaService extends AppCompatActivity implements View.OnClickListener {
 
     private Button kosongkanKolom, hapus, ubah, simpan;
-    private EditText namaCabang, alamatCabang, noTelpCabang;
-    private TextView deleteSearchCabang;
-    private String TAG= "Cabang Activity";
-    private String namaKelas= "cabang";
-    private List<CabangDAO> listCabang= new ArrayList<>();
-    private List<CabangDAO> listCabang2= new ArrayList<>();
+    private EditText namaJS, hargaJS;
+    private TextView deleteSearchJS;
+    private String TAG= "Jasa Service Activity";
+    private String namaKelas= "jasa service";
+    private List<JasaServiceDAO> listJS= new ArrayList<>();
+    private List<JasaServiceDAO> listJS2= new ArrayList<>();
     private RecyclerView recyclerView;
-    private RecyclerAdapterCabang recyclerAdapterCabang;
-    private static final int PICK_IMAGE = 100;
-    public static final String PREF_CABANG= "PREF_CABANG";
-    public int id_cabang;
+    private RecyclerAdapterJasaService raJS;
+    public int id_jasa_service;
     // search bar
     private RecyclerView recyclerViewSearch;
-    private RecyclerAdapterCabangSearch recyclerAdapterCabangSearch;
-    private EditText searchCabang;
+    private RecyclerAdapterJasaServiceSearch raJSSearch;
+    private EditText searchJasaService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cabang);
+        setContentView(R.layout.activity_jasa_service);
         getSupportActionBar().setTitle("Kembali");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Helper.networkPermission();
@@ -77,20 +78,20 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch(v.getId())
         {
-            case R.id.btnSimpanCabang:
+            case R.id.btnSimpanJasaService:
                 simpan();
-                kosongkanSearchCabangPreferences();
+                kosongkanSearchJasaServicePreferences();
                 break;
-            case R.id.btnEditCabang:
+            case R.id.btnEditJasaService:
                 ubah();
                 break;
-            case R.id.btnHapusCabang:
+            case R.id.btnHapusJasaService:
                 hapus();
-                kosongkanSearchCabangPreferences();
+                kosongkanSearchJasaServicePreferences();
                 break;
             case R.id.btnKosongkanKolom:
                 kosongkanKolom();
-                kosongkanSearchCabangPreferences();
+                kosongkanSearchJasaServicePreferences();
                 break;
         }
     }
@@ -117,36 +118,35 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
     {
         kosongkanKolom= findViewById(R.id.btnKosongkanKolom);
         kosongkanKolom.setOnClickListener(this);
-        hapus= findViewById(R.id.btnHapusCabang);
+        hapus= findViewById(R.id.btnHapusJasaService);
         hapus.setOnClickListener(this);
-        ubah= findViewById(R.id.btnEditCabang);
+        ubah= findViewById(R.id.btnEditJasaService);
         ubah.setOnClickListener(this);
-        simpan= findViewById(R.id.btnSimpanCabang);
+        simpan= findViewById(R.id.btnSimpanJasaService);
         simpan.setOnClickListener(this);
-        deleteSearchCabang= findViewById(R.id.textView_deleteSearchCabang);
+        deleteSearchJS= findViewById(R.id.textView_deleteSearchJasaService);
 
         //search bar
-        searchCabang= findViewById(R.id.editText_searchCabang);
+        searchJasaService= findViewById(R.id.editText_searchJasaService);
 
-        namaCabang= findViewById(R.id.editText_NamaCabang);
-        noTelpCabang= findViewById(R.id.editText_NoTelponCabang);
-        alamatCabang= findViewById(R.id.editText_AlamatCabang);
+        namaJS= findViewById(R.id.editText_NamaJasaService);
+        hargaJS= findViewById(R.id.editText_HargaJasaService);
     }
 
     public void buildRecyclerViewTampil()
     {
-        recyclerView= findViewById(R.id.recyclerView_Cabang);
-        recyclerAdapterCabang= new RecyclerAdapterCabang(this, listCabang);
+        recyclerView= findViewById(R.id.recyclerView_JasaService);
+        raJS= new RecyclerAdapterJasaService(this, listJS);
         RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(recyclerAdapterCabang);
+        recyclerView.setAdapter(raJS);
     }
 
     public void buildRecyclerViewSearch()
     {
-        recyclerViewSearch= findViewById(R.id.recyclerView_CabangSearch);
-        recyclerAdapterCabangSearch= new RecyclerAdapterCabangSearch(this, listCabang2);
+        recyclerViewSearch= findViewById(R.id.recyclerView_JasaServiceSearch);
+        raJSSearch= new RecyclerAdapterJasaServiceSearch(this, listJS2);
         RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext());
         recyclerViewSearch.setLayoutManager(mLayoutManager);
         recyclerViewSearch.setItemAnimator(new DefaultItemAnimator());
@@ -154,17 +154,15 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
 
     public void kosongkanKolom()
     {
-        namaCabang.setText("");
-        noTelpCabang.setText("");
-        alamatCabang.setText("");
+        namaJS.setText("");
+        hargaJS.setText("");
         FancyToast.makeText(JasaService.this, "Kolom dikosongkan", FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
     }
 
     public void isiKolom()
     {
-        namaCabang.setText("AAA");
-        noTelpCabang.setText("123");
-        alamatCabang.setText("AAA");
+        namaJS.setText("Service busi dan starter");
+        hargaJS.setText("15000");
     }
 
     private boolean isNetworkAvailable()
@@ -176,29 +174,29 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
 
     public void hapus()
     {
-        // get id cabang
-        SharedPreferences pref= getApplicationContext().getSharedPreferences(PREF_CABANG, Context.MODE_PRIVATE);
+        // get id jasa service
+        SharedPreferences pref= getApplicationContext().getSharedPreferences(Helper.PREF_JASA_SERVICE, Context.MODE_PRIVATE);
         Gson gson= new Gson();
-        String json= pref.getString(PREF_CABANG, "");
-        final CabangDAO s= gson.fromJson(json, CabangDAO.class);
+        String json= pref.getString(Helper.PREF_JASA_SERVICE, "");
+        final JasaServiceDAO js= gson.fromJson(json, JasaServiceDAO.class);
 
-        if(s == null)
+        if(js == null)
         {
             FancyToast.makeText(JasaService.this, "Pilih " +namaKelas +" untuk dihapus", FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
         }
         else
         {
-            id_cabang= s.getId_cabang();
+            id_jasa_service= js.getId_jasa_service();
             Retrofit.Builder builder= new Retrofit
                     .Builder()
                     .baseUrl(Helper.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit= builder.build();
             PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-            Call<CabangDAO> cabangDAOCall= apiClient.deleteCabang(id_cabang);
-            cabangDAOCall.enqueue(new Callback<CabangDAO>() {
+            Call<JasaServiceDAO> jsDAOCall= apiClient.deleteJasaService(id_jasa_service);
+            jsDAOCall.enqueue(new Callback<JasaServiceDAO>() {
                 @Override
-                public void onResponse(Call<CabangDAO> call, Response<CabangDAO> response) {
+                public void onResponse(Call<JasaServiceDAO> call, Response<JasaServiceDAO> response) {
                     if(response.code() == 404)
                     {
                         FancyToast.makeText(JasaService.this, "Gagal menghapus "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
@@ -210,7 +208,7 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
                 }
 
                 @Override
-                public void onFailure(Call<CabangDAO> call, Throwable t) {
+                public void onFailure(Call<JasaServiceDAO> call, Throwable t) {
                     if(!isNetworkAvailable())
                     {
                         FancyToast.makeText(JasaService.this, "Tidak ada koneksi internet", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
@@ -232,42 +230,37 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
 
     public void ubah()
     {
-        String namaCabang_tampung, noTelpCabang_tampung, alamatCabang_tampung;
-        namaCabang_tampung= namaCabang.getText().toString();
-        noTelpCabang_tampung= noTelpCabang.getText().toString();
-        alamatCabang_tampung= alamatCabang.getText().toString();
+        String namaJS_tampung;
+        double hargaJS_tampung;
+        namaJS_tampung= namaJS.getText().toString();
+        hargaJS_tampung= Double.parseDouble(hargaJS.getText().toString());
 
-        // get id cabang
-        SharedPreferences pref= getApplicationContext().getSharedPreferences(PREF_CABANG, Context.MODE_PRIVATE);
+        // get id jasa service
+        SharedPreferences pref= getApplicationContext().getSharedPreferences(Helper.PREF_JASA_SERVICE, Context.MODE_PRIVATE);
         Gson gson= new Gson();
-        String json= pref.getString(PREF_CABANG, "");
-        final CabangDAO s= gson.fromJson(json, CabangDAO.class);
+        String json= pref.getString(Helper.PREF_JASA_SERVICE, "");
+        final JasaServiceDAO js= gson.fromJson(json, JasaServiceDAO.class);
 
-        if(s == null)
+        if(js == null)
         {
             FancyToast.makeText(JasaService.this, "Pilih " +namaKelas +" untuk diedit", FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
         }
         else
         {
-            if(namaCabang_tampung.isEmpty() || noTelpCabang_tampung.isEmpty() || alamatCabang_tampung.isEmpty())
+            if(namaJS_tampung.isEmpty() || hargaJS.getText().toString().isEmpty())
             {
                 FancyToast.makeText(JasaService.this, "Semua kolom inputan harus terisi", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
             }
-            else if(namaCabang_tampung.length()>0 && namaCabang_tampung.length()<4 || namaCabang_tampung.length()>50 ||
-                    noTelpCabang_tampung.length()>0 && noTelpCabang_tampung.length()<12 || noTelpCabang_tampung.length()>13 ||
-                    alamatCabang_tampung.length()>0 && alamatCabang_tampung.length()<10 || alamatCabang_tampung.length()>50)
+            else if(namaJS_tampung.length()>0 && namaJS_tampung.length()<4 || namaJS_tampung.length()>50 ||
+                    hargaJS_tampung <= 0 )
             {
-                if(namaCabang_tampung.length()<4 || namaCabang_tampung.length()>50)
+                if(namaJS_tampung.length()<4 || namaJS_tampung.length()>50)
                 {
                     FancyToast.makeText(JasaService.this, "Nama " +namaKelas +" harus 4-50 huruf", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
                 }
-                else if(noTelpCabang_tampung.length()<12 || noTelpCabang_tampung.length()>13)
+                else if(hargaJS_tampung <= 0)
                 {
-                    FancyToast.makeText(JasaService.this, "Nomor telepon harus 12-13 digit", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
-                }
-                else if(alamatCabang_tampung.length()<10 || alamatCabang_tampung.length()>50)
-                {
-                    FancyToast.makeText(JasaService.this, "Alamat " +namaKelas +" harus 10-50 huruf", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
+                    FancyToast.makeText(JasaService.this, "Harga " +namaKelas +" harus diatas 0", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
                 }
             }
             else
@@ -276,11 +269,11 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
                 Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
                 Retrofit retrofit= builder.build();
                 PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-                CabangDAO sp= new CabangDAO(namaCabang_tampung, noTelpCabang_tampung, alamatCabang_tampung);
+                JasaServiceDAO js2= new JasaServiceDAO(namaJS_tampung, hargaJS_tampung);
 
-                id_cabang= s.getId_cabang();
-                Call<String> cabangDAOCall= apiClient.requestUpdateCabang(sp, id_cabang);
-                cabangDAOCall.enqueue(new Callback<String>() {
+                id_jasa_service= js.getId_jasa_service();
+                Call<String> jsDAOCall= apiClient.requestUpdateJasaService(js2, id_jasa_service);
+                jsDAOCall.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         FancyToast.makeText(JasaService.this, "Berhasil mengedit "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
@@ -311,102 +304,93 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
 
     public void simpan()
     {
-        String namaCabang_tampung, noTelpCabang_tampung, alamatCabang_tampung;
-        namaCabang_tampung= namaCabang.getText().toString();
-        noTelpCabang_tampung= noTelpCabang.getText().toString();
-        alamatCabang_tampung= alamatCabang.getText().toString();
-        if(namaCabang_tampung.isEmpty() || noTelpCabang_tampung.isEmpty() || alamatCabang_tampung.isEmpty())
+        String namaJS_tampung;
+        double hargaJS_tampung;
+        namaJS_tampung= namaJS.getText().toString();
+        hargaJS_tampung= Double.parseDouble(hargaJS.getText().toString());
+
+        if(namaJS_tampung.isEmpty() || hargaJS.getText().toString().isEmpty())
         {
             FancyToast.makeText(JasaService.this, "Semua kolom inputan harus terisi", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
         }
-        else if(namaCabang_tampung.length()>0 && namaCabang_tampung.length()<4 || namaCabang_tampung.length()>50 ||
-                noTelpCabang_tampung.length()>0 && noTelpCabang_tampung.length()<12 || noTelpCabang_tampung.length()>13 ||
-                alamatCabang_tampung.length()>0 && alamatCabang_tampung.length()<10 || alamatCabang_tampung.length()>50)
+        else if(namaJS_tampung.length()>0 && namaJS_tampung.length()<4 || namaJS_tampung.length()>50 ||
+                hargaJS_tampung <= 0 )
         {
-            if(namaCabang_tampung.length()<4 || namaCabang_tampung.length()>50)
+            if(namaJS_tampung.length()<4 || namaJS_tampung.length()>50)
             {
                 FancyToast.makeText(JasaService.this, "Nama " +namaKelas +" harus 4-50 huruf", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
             }
-            else if(noTelpCabang_tampung.length()<12 || noTelpCabang_tampung.length()>13)
+            else if(hargaJS_tampung <= 0)
             {
-                FancyToast.makeText(JasaService.this, "Nomor telepon harus 12-13 digit", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
-            }
-            else if(alamatCabang_tampung.length()<10 || alamatCabang_tampung.length()>50)
-            {
-                FancyToast.makeText(JasaService.this, "Alamat " +namaKelas +" harus 10-50 huruf", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
+                FancyToast.makeText(JasaService.this, "Harga " +namaKelas +" harus diatas 0", FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
             }
         }
-    else
-    {
-        //POST data into API ,,Build retrofit
-        Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-        Call<String> cabangDAOCall= apiClient.requestSaveCabang(namaCabang_tampung, noTelpCabang_tampung, alamatCabang_tampung);
+        else
+        {
+            //POST data into API ,,Build retrofit
+            Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit= builder.build();
+            PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
+            Call<String> jsDAOCall= apiClient.requestSaveJasaService(namaJS_tampung, hargaJS_tampung);
 
-        cabangDAOCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                FancyToast.makeText(JasaService.this, "Berhasil menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
-                recreate();
-            }
+            jsDAOCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    FancyToast.makeText(JasaService.this, "Berhasil menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                    recreate();
+                }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                if(!isNetworkAvailable())
-                {
-                    FancyToast.makeText(JasaService.this, "Tidak ada koneksi internet", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
-                }
-                else
-                {
-                    if (t instanceof IOException) {
-                        FancyToast.makeText(JasaService.this, "Gagal menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
-                        // logging probably not necessary
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    if(!isNetworkAvailable())
+                    {
+                        FancyToast.makeText(JasaService.this, "Tidak ada koneksi internet", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
                     }
-                    else {
-                        FancyToast.makeText(JasaService.this, "Gagal menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                    else
+                    {
+                        if (t instanceof IOException) {
+                            FancyToast.makeText(JasaService.this, "Gagal menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                            // logging probably not necessary
+                        }
+                        else {
+                            FancyToast.makeText(JasaService.this, "Gagal menyimpan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                        }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
 }
 
     public void tampil()
     {
         FancyToast.makeText(JasaService.this, "Sedang menampilkan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
-        Retrofit.Builder builder= new Retrofit
-                .Builder()
-                .baseUrl(Helper.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit= builder.build();
         PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-
-        Call<List<CabangDAO>> cabangDAOCall= apiClient.getAllCabang();
-
-        cabangDAOCall.enqueue(new Callback<List<CabangDAO>>() {
+        Call<List<JasaServiceDAO>> jsDAOCall= apiClient.getAllJasaService();
+        jsDAOCall.enqueue(new Callback<List<JasaServiceDAO>>() {
             @Override
-            public void onResponse(Call<List<CabangDAO>> call, Response<List<CabangDAO>> response) {
+            public void onResponse(Call<List<JasaServiceDAO>> call, Response<List<JasaServiceDAO>> response) {
                 // mengambil data dari response, agar listSparepart terisi
-                recyclerAdapterCabang.notifyDataSetChanged();
-                recyclerAdapterCabang= new RecyclerAdapterCabang(JasaService.this, response.body());
-                recyclerView.setAdapter(recyclerAdapterCabang);
+                raJS.notifyDataSetChanged();
+                raJS= new RecyclerAdapterJasaService(JasaService.this, response.body());
+                recyclerView.setAdapter(raJS);
 
                 // mengambil data dari response, agar listSparepart2 terisi
-                recyclerAdapterCabangSearch.notifyDataSetChanged();
-                recyclerAdapterCabangSearch= new RecyclerAdapterCabangSearch(JasaService.this, response.body());
+                raJSSearch.notifyDataSetChanged();
+                raJSSearch= new RecyclerAdapterJasaServiceSearch(JasaService.this, response.body());
                 if(response.body() != null)
                 {
                     for(int i=0; i<response.body().size(); i++)
                     {
-                        listCabang2.add(response.body().get(i));
+                        listJS2.add(response.body().get(i));
                     }
                 }
                 FancyToast.makeText(JasaService.this, "Berhasil menampilkan "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
             }
 
             @Override
-            public void onFailure(Call<List<CabangDAO>> call, Throwable t) {
+            public void onFailure(Call<List<JasaServiceDAO>> call, Throwable t) {
                 if(!isNetworkAvailable())
                 {
                     FancyToast.makeText(JasaService.this, "Tidak ada koneksi internet", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
@@ -427,19 +411,19 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
 
     public void cari()
     {
-        deleteSearchCabang.setOnClickListener(new View.OnClickListener() {
+        deleteSearchJS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchCabang.setText("");
+                searchJasaService.setText("");
             }
         });
 
-        searchCabang.addTextChangedListener(new TextWatcher() {
+        searchJasaService.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(recyclerViewSearch.getAdapter() != null)
                 {
-                    loadSearchCabangPreferences();
+                    loadSearchJasaServicePreferences();
                 }
             }
 
@@ -454,45 +438,44 @@ public class JasaService extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    private void loadSearchCabangPreferences()
+    private void loadSearchJasaServicePreferences()
     {
-        SharedPreferences pref= getApplicationContext().getSharedPreferences(PREF_CABANG, Context.MODE_PRIVATE);
+        SharedPreferences pref= getApplicationContext().getSharedPreferences(Helper.PREF_JASA_SERVICE, Context.MODE_PRIVATE);
         Gson gson= new Gson();
-        String json= pref.getString(PREF_CABANG, "");
-        final CabangDAO s= gson.fromJson(json, CabangDAO.class);
+        String json= pref.getString(Helper.PREF_JASA_SERVICE, "");
+        final JasaServiceDAO js= gson.fromJson(json, JasaServiceDAO.class);
 
-        if(s != null)
+        if(js != null)
         {
-            namaCabang.setText(s.getNama_cabang());
-            noTelpCabang.setText(s.getNo_telepon_cabang());
-            alamatCabang.setText(s.getAlamat_cabang());
+            namaJS.setText(js.getNamaJasaService());
+            hargaJS.setText(String.valueOf(js.getHargaJasaService()));
         }
     }
 
-    private void kosongkanSearchCabangPreferences()
+    private void kosongkanSearchJasaServicePreferences()
     {
-        SharedPreferences pref= getApplicationContext().getSharedPreferences(PREF_CABANG, Context.MODE_PRIVATE);
+        SharedPreferences pref= getApplicationContext().getSharedPreferences(Helper.PREF_JASA_SERVICE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= pref.edit();
-        editor.putString(PREF_CABANG, null);
+        editor.putString(Helper.PREF_JASA_SERVICE, null);
         editor.commit();
     }
 
     private void filter(String text) {
-        List<CabangDAO> filteredList = new ArrayList<>();
+        List<JasaServiceDAO> filteredList = new ArrayList<>();
 
-        for (CabangDAO item : listCabang2) {
-            if (item.getNama_cabang().toLowerCase().contains(text.toLowerCase())) {
+        for (JasaServiceDAO item : listJS2) {
+            if (item.getNamaJasaService().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
-        recyclerAdapterCabangSearch.filterList(filteredList);
+        raJSSearch.filterList(filteredList);
         if(text.isEmpty() || text == "" || text == null || text.equals(null))
         {
             recyclerViewSearch.setAdapter(null); // show nothing
         }
         else
         {
-            recyclerViewSearch.setAdapter(recyclerAdapterCabangSearch); //show something
+            recyclerViewSearch.setAdapter(raJSSearch); //show something
         }
     }
 

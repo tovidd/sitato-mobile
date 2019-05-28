@@ -40,6 +40,7 @@
         <activity android:name=".Pegawai.Area.Kelola.data.Pelanggan" />
         <activity android:name=".Pegawai.Area.Kelola.data.Cabang" />
         <activity android:name=".Pegawai.Area.Kelola.data.Kendaraan" />
+        <activity android:name=".Pegawai.Area.Kelola.data.JasaService" />
         <activity
             android:name=".Pegawai.Area.PegawaiMainActivity"
             android:label="@string/title_activity_pegawai_main"

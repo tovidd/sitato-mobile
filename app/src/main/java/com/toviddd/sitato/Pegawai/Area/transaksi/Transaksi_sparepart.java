@@ -143,6 +143,7 @@ public class Transaksi_sparepart extends AppCompatActivity {
                     {
                         case DialogInterface.BUTTON_POSITIVE:
                             startActivity(new Intent(Transaksi_sparepart.this, Transaksi_menu.class));
+                            overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
                             break;
                         case DialogInterface.BUTTON_NEGATIVE:
                             break;

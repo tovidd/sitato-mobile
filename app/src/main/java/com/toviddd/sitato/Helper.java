@@ -25,6 +25,7 @@ public class Helper {
     public static final String PREF_LIST_BELI_TRANSAKSI_JASA_SERVICE= "PREF_LIST_BELI_TRANSAKSI_JASA_SERVICE";
     public static final String PREF_PELANGGAN_TRANSAKSI= "PREF_PELANGGAN_TRANSAKSI";
     public static final String PREF_PELANGGAN= "PREF_PELANGGAN";
+    public static final String PREF_JASA_SERVICE= "PREF_JASA_SERVICE";
     public static final String PREF_STATUS_LOGIN= "PREF_STATUS_LOGIN";
     public static final String PREF_STATUS_NOTIF= "PREF_STATUS_NOTIF";
     public static final String PREF_STATUS_NOTIF2= "PREF_STATUS_NOTIF2";

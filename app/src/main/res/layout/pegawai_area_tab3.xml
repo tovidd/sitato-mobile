@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".Pegawai.Area.PegawaiMainActivity$PlaceholderFragment">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout_SparepartKurangDariStokMinimal_Laporan"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@color/orange">
@@ -35,13 +36,12 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnSparepartKurangDariStokMinimal"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:background="@mipmap/ic_stok_kurang" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sparepart kurang dari stok minimal"
                         android:layout_gravity="center_vertical"
@@ -51,13 +51,11 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/linearLayout_SparepartTerlaris_Laporan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:visibility="invisible"
-                android:enabled="false"
                 android:background="@color/orange">
 
                 <LinearLayout
@@ -70,15 +68,174 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnSoon"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
-                        android:background="@mipmap/no_image" />
+                        android:background="@mipmap/ic_sparepart_terlaris" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sparepart kurang dari stok minimal"
+                        android:text="Sparepart terlaris"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_PendapatanBulanan_Laporan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:padding="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_pendapatan_bulanan" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pendapatan bulanan"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_PendapatanTahunan_Laporan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:padding="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_pendapatan_tahunan" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pendapatan tahunan"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_PengeluaranBulanan_Laporan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:padding="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_pengeluaran_bulanan" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pengeluaran bulanan"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_PenjualanJasa_Laporan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:padding="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_penjualan_jasa" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Penjualan jasa"
+                        android:layout_gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_SisaStok_Laporan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/orange">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:padding="20dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@mipmap/ic_sisa_stok" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sisa stok"
                         android:layout_gravity="center_vertical"
                         android:textAlignment="center"
                         android:textColor="@color/black"
@@ -91,6 +248,6 @@
                 android:layout_height="100dp" />
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

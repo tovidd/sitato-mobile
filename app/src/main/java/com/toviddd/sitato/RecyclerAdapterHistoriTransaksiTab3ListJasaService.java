@@ -77,8 +77,7 @@ public class RecyclerAdapterHistoriTransaksiTab3ListJasaService extends Recycler
         {
             myViewHolder.kodeJS.setText(String.valueOf(tjsDAO.getKode_jasa_service()));
         }
-        Log.d(TAG, "onBindViewHolder: RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR" +tjsDAO.getJumlah_transaksi_penjualan_jasa_service());
-        myViewHolder.jumlahBeliJS.setText(String.valueOf(tjsDAO.getJumlah_transaksi_penjualan_jasa_service()) +" unit");
+        myViewHolder.jumlahBeliJS.setText(String.valueOf(tjsDAO.getJumlah_transaksi_penjualan_jasa_service()) +" unit" +", @" +String.valueOf(tjsDAO.getHarga_jasa_service()));
         myViewHolder.subtotalJS.setText("Rp. " +String.valueOf(tjsDAO.getSubtotal_transaksi_penjualan_jasa_service()));
         myViewHolder.montirJS.setText("Montir: " +tjsDAO.getNama_montir());
     }

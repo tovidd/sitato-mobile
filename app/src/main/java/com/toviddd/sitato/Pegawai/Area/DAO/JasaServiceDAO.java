@@ -23,13 +23,16 @@ public class JasaServiceDAO {
 
     String created_at, updated_at, deleted_at;
 
-    public JasaServiceDAO(String kodeJasaService, String namaJasaService, double hargaJasaService) {
-        this.kodeJasaService = kodeJasaService;
+    public JasaServiceDAO(String namaJasaService, double hargaJasaService) {
         this.namaJasaService = namaJasaService;
         this.hargaJasaService = hargaJasaService;
     }
 
-    public JasaServiceDAO() {
+    public JasaServiceDAO(int id_jasa_service, String namaJasaService, String kodeJasaService, double hargaJasaService) {
+        this.id_jasa_service = id_jasa_service;
+        this.kodeJasaService = kodeJasaService;
+        this.namaJasaService = namaJasaService;
+        this.hargaJasaService = hargaJasaService;
     }
 
     public int getId_jasa_service() {

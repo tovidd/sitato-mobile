@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Cabang;
+import com.toviddd.sitato.Pegawai.Area.Kelola.data.JasaService;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Kendaraan;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Pelanggan;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Sparepart;
@@ -22,7 +23,7 @@ import quatja.com.vorolay.VoronoiView;
 
 public class PegawaiArea_tab1 extends Fragment implements View.OnClickListener {
     public View rootView;
-    private Button sparepart, supplier, cabang, pelanggan, kendaraan;
+    private Button sparepart, supplier, cabang, pelanggan, kendaraan, jasaService;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +52,9 @@ public class PegawaiArea_tab1 extends Fragment implements View.OnClickListener {
             case R.id.btnKendaraan:
                 actionKendaraan();
                 break;
-
+            case R.id.btnJasaService:
+                actionJasaService();
+                break;
         }
     }
 
@@ -62,12 +65,14 @@ public class PegawaiArea_tab1 extends Fragment implements View.OnClickListener {
         cabang= rootView.findViewById(R.id.btnCabang);
         pelanggan= rootView.findViewById(R.id.btnPelanggan);
         kendaraan= rootView.findViewById(R.id.btnKendaraan);
+        jasaService= rootView.findViewById(R.id.btnJasaService);
 
         sparepart.setOnClickListener(this);
         supplier.setOnClickListener(this);
         cabang.setOnClickListener(this);
         pelanggan.setOnClickListener(this);
         kendaraan.setOnClickListener(this);
+        jasaService.setOnClickListener(this);
     }
 
     private void actionSparepart()
@@ -97,6 +102,12 @@ public class PegawaiArea_tab1 extends Fragment implements View.OnClickListener {
     private void actionKendaraan()
     {
         Intent intent= new Intent(getActivity(), Kendaraan.class);
+        startActivity(intent);
+    }
+
+    private void actionJasaService()
+    {
+        Intent intent= new Intent(getActivity(), JasaService.class);
         startActivity(intent);
     }
 }

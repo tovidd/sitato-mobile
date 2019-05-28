@@ -179,14 +179,18 @@ public class LoginActivity extends AppCompatActivity{
                         FancyToast.makeText(LoginActivity.this, "Berhasil "+namaKelas, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
                         //mDialog.cancel();
                         Bundle b= getIntent().getExtras();
-                        if(b.getInt(Helper.NOTIF_SPAREPART, 0) == 1)
+                        if(b != null)
                         {
-                            startActivity(new Intent(LoginActivity.this, NotificationSparepart.class));
+                            if(b.getInt(Helper.NOTIF_SPAREPART, 0) == 1)
+                            {
+                                startActivity(new Intent(LoginActivity.this, NotificationSparepart.class));
+                                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            }
                         }
                         else
                         {
-                            Intent intent= new Intent(LoginActivity.this, PegawaiMainActivity.class);
-                            startActivity(intent);
+                            startActivity(new Intent(LoginActivity.this, PegawaiMainActivity.class));
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         }
                     }
                     else

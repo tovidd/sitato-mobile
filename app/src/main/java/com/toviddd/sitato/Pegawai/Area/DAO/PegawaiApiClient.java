@@ -217,6 +217,24 @@ public interface PegawaiApiClient {
             @Path("id_jasa_service") int id_jasa_service
     );
 
+    @POST("jasaService")
+    @FormUrlEncoded
+    Call<String> requestSaveJasaService(
+            @Field("nama_jasa_service") String nama_jasa_service,
+            @Field("harga_jasa_service") double harga_jasa_service
+    );
+
+    @DELETE("jasaService/{id_jasa_service}")
+    Call<JasaServiceDAO> deleteJasaService(
+            @Path("id_jasa_service") int id_jasa_service
+    );
+
+    @PUT("jasaService/{id_jasa_service}")
+    Call<String> requestUpdateJasaService(
+            @Body JasaServiceDAO jasaServiceDAO,
+            @Path("id_jasa_service") int id_jasa_service
+    );
+
 
 
 

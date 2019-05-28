@@ -159,7 +159,6 @@ public class RecyclerAdapterHistoriTransaksiTampil extends RecyclerView.Adapter<
                     editor.putString(Helper.PREF_TRANSAKSI, json);
                     editor.commit();
 
-                    Toast.makeText(v.getContext(), "id_transaksi: " +response.body().getId_transaksi(), Toast.LENGTH_SHORT).show();
                     Intent intent= new Intent(v.getContext(), Transaksi_menu.class);
                     v.getContext().startActivity(intent);
                 }

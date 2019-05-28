@@ -63,7 +63,7 @@ public class RecyclerAdapterHistoriTransaksiTab3ListSparepart extends RecyclerVi
         //Log.d(TAG, "-----------------------> onCreate lisSparepart sebelum createObject: " +result.get(i).getNama_sparepart());
         myViewHolder.namaSparepart.setText(tsDAO.getNama_sparepart());
         myViewHolder.kodeSparepart.setText(tsDAO.getKode_sparepart());
-        myViewHolder.jumlahBeliSparepart.setText(String.valueOf(tsDAO.getJumlah_transaksi_penjualan_sparepart()) +" unit");
+        myViewHolder.jumlahBeliSparepart.setText(String.valueOf(tsDAO.getJumlah_transaksi_penjualan_sparepart()) +" unit" +", @" +String.valueOf(tsDAO.getHarga_jual_sparepart()));
         myViewHolder.subtotalSparepart.setText("Rp. " +String.valueOf(tsDAO.getSubtotal_transaksi_penjualan_sparepart()));
     }
 

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -148,8 +149,8 @@ public class Tab1 extends Fragment implements View.OnClickListener {
         nama= "Atma Auto Babarsari";
         info= "Bengkel Pusat Atma Auto Motorcycle Sparepart and Services";
         jam= "Buka pukul 08:00 A.M - 08:00 P.M";
-        no_hp= "+62 822 5578 4350";
-        web= "http://www.atmaauto.com";
+        no_hp= "+62 856 5825 7505";
+        web= "http://p3l-tovid.toviddd.xyz";
         alamat= "Jalan babarsari gang purisari blok 11B, Kledokan, Caturtunggal, Kecamatan Depok, Kabupaten Sleman, Daerah Istimewa Yogykakarta";
 
         namaBengkel.setText(nama);
@@ -162,9 +163,14 @@ public class Tab1 extends Fragment implements View.OnClickListener {
 
     private void actionWeb()
     {
-        Uri uri= Uri.parse(web);
-        Intent intent= new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+//        Uri uri= Uri.parse(web);
+//        Intent intent= new Intent(Intent.ACTION_VIEW, uri);
+//        startActivity(intent);
+
+        CustomTabsIntent.Builder builder= new CustomTabsIntent.Builder();
+        builder.setToolbarColor(getResources().getColor(R.color.orange));
+        CustomTabsIntent customTabsIntent= builder.build();
+        customTabsIntent.launchUrl(rootView.getContext(), Uri.parse(web));
     }
 
     private void actionNoTelp()
