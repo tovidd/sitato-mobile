@@ -82,6 +82,7 @@ public class Supplier extends AppCompatActivity implements View.OnClickListener 
         Helper.networkPermission();
 
         initAttribute();
+        isiKolom();
         buildRecyclerViewTampil();
         tampil();
         buildRecyclerViewSearch();
@@ -173,10 +174,10 @@ public class Supplier extends AppCompatActivity implements View.OnClickListener 
 
     public void isiKolom()
     {
-        namaSupplier.setText("AAA");
-        noTelpSupplier.setText("AAA");
-        alamatSupplier.setText("AAA");
-        namaSales.setText("AAA");
+        namaSupplier.setText("ATMA AUTO");
+        noTelpSupplier.setText("081277880000");
+        alamatSupplier.setText("Jalan Babarsari No.44, Janti, Caturtunggal,");
+        namaSales.setText("Azizah");
     }
 
     private boolean isNetworkAvailable()

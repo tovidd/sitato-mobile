@@ -154,17 +154,21 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
             case R.id.btnSimpanSparepart:
                 simpan();
                 kosongkanSearchSparepartPreferences();
+                enableView(true);
                 break;
             case R.id.btnEditSparepart:
                 ubah();
+                enableView(true);
                 break;
             case R.id.btnHapusSparepart:
                 hapus();
                 kosongkanSearchSparepartPreferences();
+                enableView(true);
                 break;
             case R.id.btnKosongkanKolom:
                 kosongkanKolom();
                 kosongkanSearchSparepartPreferences();
+                enableView(true);
                 break;
         }
     }
@@ -470,6 +474,7 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
         hargaJualSparepart.setText("");
         merekKendaraanSparepart.setText("");
         jenisKendaraanSparepart.setText("");
+        gambarSparepart.setImageResource(R.mipmap.no_image);
         FancyToast.makeText(Sparepart.this, "Kolom dikosongkan", FancyToast.LENGTH_SHORT, FancyToast.INFO, true).show();
     }
 
@@ -477,8 +482,8 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
     {
         kodeSparepart.setText("SDE");
         namaSparepart.setText("Oli samping 2T Evalube");
-        jenisSparepart.setText("Oli");
-        stokSparepart.setText("13");
+        jenisSparepart.setText("Oli mesin");
+        stokSparepart.setText("30");
         stokMinimumSparepart.setText("20");
         hargaBeliSparepart.setText("23000");
         hargaJualSparepart.setText("32000");
@@ -617,24 +622,19 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
         }
         else
         {
-            if(kodeSparepart_tampung.isEmpty() || namaSparepart_tampung.isEmpty() || jenisSparepart_tampung.isEmpty() ||
+            if(namaSparepart_tampung.isEmpty() || jenisSparepart_tampung.isEmpty() ||
                     stokSparepart_tampung == 0 || stokMinimumSparepart_tampung == 0 || rakSparepart_tampung.isEmpty() ||
                     hargaBeliSparepart_tampung == 0 || hargaJualSparepart_tampung == 0 || merekKendaraanSparepart_tampung.isEmpty() ||
                     jenisKendaraanSparepart_tampung.isEmpty())
             {
                 FancyToast.makeText(Sparepart.this, "Semua kolom inputan harus terisi", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
             }
-            else if(kodeSparepart_tampung.length() > 0 && kodeSparepart_tampung.length() != 3 ||
-                    namaSparepart_tampung.length() > 0 && namaSparepart_tampung.length() < 4 || namaSparepart_tampung.length()>50 ||
+            else if(namaSparepart_tampung.length() > 0 && namaSparepart_tampung.length() < 4 || namaSparepart_tampung.length()>50 ||
                     jenisSparepart_tampung.length() > 0 && jenisSparepart_tampung.length() < 3 || jenisSparepart_tampung.length()>50 ||
                     merekKendaraanSparepart_tampung.length() > 0 && merekKendaraanSparepart_tampung.length() < 4 || merekKendaraanSparepart_tampung.length()>50 ||
                     jenisKendaraanSparepart_tampung.length() > 0 && jenisKendaraanSparepart_tampung.length() < 4 || jenisKendaraanSparepart_tampung.length()>50)
             {
-                if(kodeSparepart_tampung.length() != 3)
-                {
-                    FancyToast.makeText(Sparepart.this, "Kode " +namaKelas +" harus 3 huruf", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
-                }
-                else if(namaSparepart_tampung.length() <4 || namaSparepart_tampung.length()>50)
+                if(namaSparepart_tampung.length() <4 || namaSparepart_tampung.length()>50)
                 {
                     FancyToast.makeText(Sparepart.this, "Nama " +namaKelas +" harus 4 - 50 huruf", FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
                 }
@@ -662,7 +662,7 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
                 Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
                 Retrofit retrofit= builder.build();
                 PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-                SparepartDAO sp= new SparepartDAO(kodeSparepart_tampung.toUpperCase(), namaSparepart_tampung, jenisSparepart_tampung, stokSparepart_tampung, stokMinimumSparepart_tampung, rakSparepart_tampung, hargaBeliSparepart_tampung, hargaJualSparepart_tampung, merekKendaraanSparepart_tampung, jenisKendaraanSparepart_tampung, gambarSparepart_tampung+".jpg");
+                SparepartDAO sp= new SparepartDAO(namaSparepart_tampung, jenisSparepart_tampung, stokSparepart_tampung, stokMinimumSparepart_tampung, rakSparepart_tampung, hargaBeliSparepart_tampung, hargaJualSparepart_tampung, merekKendaraanSparepart_tampung, jenisKendaraanSparepart_tampung, gambarSparepart_tampung+".jpg");
 
                 id_sparepart= s.getId_sparepart();
                 Call<String> sparepartDAOCall= apiClient.requestUpdateSparepart(sp, id_sparepart);
@@ -923,6 +923,7 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
         if(s != null)
         {
             id_sparepart= s.getId_sparepart();
+            enableView(false);
             kodeSparepart.setText(s.getKode_sparepart());
             namaSparepart.setText(s.getNama_sparepart());
             jenisSparepart.setText(s.getJenis_sparepart());
@@ -981,6 +982,11 @@ public class Sparepart extends AppCompatActivity implements View.OnClickListener
         SharedPreferences.Editor editor= pref.edit();
         editor.putString(PREF_SPAREPART, null);
         editor.commit();
+    }
+
+    private void enableView(Boolean b)
+    {
+        kodeSparepart.setEnabled(b);
     }
 
     private Drawable LoadImageFromWeb(String url){

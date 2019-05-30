@@ -19,16 +19,35 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
-                <TextView
+                <Button
+                    android:id="@+id/button_kurangDari_notifikasiSparepart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Daftar sparepart kurang dari stok minimal"
-                    android:textAlignment="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:textSize="10pt"/>
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:padding="15dp"
+                    android:text="Stok masuk batas minimum"/>
+                <Button
+                    android:id="@+id/button_lebihDari_notifikasiSparepart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:padding="15dp"
+                    android:text="Stok diluar batas minimum"/>
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Daftar sparepart kurang dari stok minimal"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginBottom="30dp"-->
+                    <!--android:textSize="10pt"/>-->
             </LinearLayout>
 
             <LinearLayout

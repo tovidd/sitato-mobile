@@ -62,6 +62,19 @@ public class SparepartDAO {
         this.gambar_sparepart = gambar_sparepart;
     }
 
+    public SparepartDAO(String nama_sparepart, String jenis_sparepart, int stok_sparepart, int stok_minimum_sparepart, String rak_sparepart, double harga_beli_sparepart, double harga_jual_sparepart, String merek_kendaraan_sparepart, String jenis_kendaraan_sparepart, String gambar_sparepart) {
+        this.nama_sparepart = nama_sparepart;
+        this.jenis_sparepart = jenis_sparepart;
+        this.stok_sparepart = stok_sparepart;
+        this.stok_minimum_sparepart = stok_minimum_sparepart;
+        this.rak_sparepart = rak_sparepart;
+        this.harga_beli_sparepart = harga_beli_sparepart;
+        this.harga_jual_sparepart = harga_jual_sparepart;
+        this.merek_kendaraan_sparepart = merek_kendaraan_sparepart;
+        this.jenis_kendaraan_sparepart = jenis_kendaraan_sparepart;
+        this.gambar_sparepart = gambar_sparepart;
+    }
+
     public int getId_sparepart() {
         return id_sparepart;
     }

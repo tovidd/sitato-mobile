@@ -2,7 +2,7 @@ package com.toviddd.sitato.Pegawai.Area.DAO;
 
 public class TransaksiPengadaanDetilDAO {
 
-    int id_detil_pengadaan_sparepart, id_pengadaan_sparepart, id_sparepart, jumlah_beli_detil_pengadaan_sparepart;
+    int id_detil_pengadaan_sparepart, id_pengadaan_sparepart, id_sparepart, jumlah_beli_detil_pengadaan_sparepart, jumlah_barang_datang_pengadaan_sparepart;
     String satuan_detil_pengadaan_sparepart, created_at, updated_at, deleted_at;
     double subtotal_detil_pengadaan_sparepart;
 
@@ -11,6 +11,8 @@ public class TransaksiPengadaanDetilDAO {
     String tanggal_pengadaan_sparepart, kode_sparepart, nama_sparepart, jenis_sparepart, rak_sparepart;
     String merek_kendaraan_sparepart, jenis_kendaraan_sparepart, gambar_sparepart;
     double harga_beli_sparepart, harga_jual_sparepart;
+    String nama_cabang, no_telepon_cabang, alamat_cabang;
+    String no_telepon_supplier, nama_supplier, alamat_supplier, nama_sales;
 
     public TransaksiPengadaanDetilDAO(int jumlah_beli_detil_pengadaan_sparepart, double subtotal_detil_pengadaan_sparepart) {
         this.jumlah_beli_detil_pengadaan_sparepart = jumlah_beli_detil_pengadaan_sparepart;
@@ -89,7 +91,13 @@ public class TransaksiPengadaanDetilDAO {
         this.subtotal_detil_pengadaan_sparepart = subtotal_detil_pengadaan_sparepart;
     }
 
+    public int getJumlah_barang_datang_pengadaan_sparepart() {
+        return jumlah_barang_datang_pengadaan_sparepart;
+    }
 
+    public void setJumlah_barang_datang_pengadaan_sparepart(int jumlah_barang_datang_pengadaan_sparepart) {
+        this.jumlah_barang_datang_pengadaan_sparepart = jumlah_barang_datang_pengadaan_sparepart;
+    }
 
     // left join
 
@@ -204,5 +212,61 @@ public class TransaksiPengadaanDetilDAO {
 
     public void setHarga_jual_sparepart(double harga_jual_sparepart) {
         this.harga_jual_sparepart = harga_jual_sparepart;
+    }
+
+    public String getNama_cabang() {
+        return nama_cabang;
+    }
+
+    public void setNama_cabang(String nama_cabang) {
+        this.nama_cabang = nama_cabang;
+    }
+
+    public String getNo_telepon_cabang() {
+        return no_telepon_cabang;
+    }
+
+    public void setNo_telepon_cabang(String no_telepon_cabang) {
+        this.no_telepon_cabang = no_telepon_cabang;
+    }
+
+    public String getAlamat_cabang() {
+        return alamat_cabang;
+    }
+
+    public void setAlamat_cabang(String alamat_cabang) {
+        this.alamat_cabang = alamat_cabang;
+    }
+
+    public String getNo_telepon_supplier() {
+        return no_telepon_supplier;
+    }
+
+    public void setNo_telepon_supplier(String no_telepon_supplier) {
+        this.no_telepon_supplier = no_telepon_supplier;
+    }
+
+    public String getNama_supplier() {
+        return nama_supplier;
+    }
+
+    public void setNama_supplier(String nama_supplier) {
+        this.nama_supplier = nama_supplier;
+    }
+
+    public String getAlamat_supplier() {
+        return alamat_supplier;
+    }
+
+    public void setAlamat_supplier(String alamat_supplier) {
+        this.alamat_supplier = alamat_supplier;
+    }
+
+    public String getNama_sales() {
+        return nama_sales;
+    }
+
+    public void setNama_sales(String nama_sales) {
+        this.nama_sales = nama_sales;
     }
 }

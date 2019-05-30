@@ -22,6 +22,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Pegawai.Area.transaksi.Transaksi_pengadaan"></activity>
+        <activity android:name=".Pegawai.Area.transaksi.Transaksi_pengadaan_tampil"></activity>
         <activity android:name=".Pegawai.Area.transaksi.Transaksi_pengadaan_detil" />
         <activity android:name=".HistoriTransaksiPelangganDetil" />
         <activity android:name=".Pegawai.Area.transaksi.Transaksi_tampil" />

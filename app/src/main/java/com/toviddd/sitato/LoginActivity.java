@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity{
         password = findViewById(R.id.textPassword);
         btnLoginPegawai = findViewById(R.id.btnLoginPegawai);
         btnIgnoreLoginPegawai= findViewById(R.id.btnIgnoreLogin);
+        btnIgnoreLoginPegawai.setVisibility(View.GONE);
     }
 
     private void UserSignIn() {

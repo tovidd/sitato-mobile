@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -45,7 +46,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NotificationSparepart extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class NotificationSparepart extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     String TAG= "Notifikasi";
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -54,6 +55,9 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
     public String[] TABLE_HEADERS= {"No", "Nama", "Min", "Stok"};
     public List<SparepartDAO> listSparepartKurang2= new ArrayList<>();
     public String[][] listSparepartKurang;
+
+    //
+    private Button btnKurang, btnLebih;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,19 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
         initAttribute();
         listSparepartKurang2= null;
         loadSparepartKurang();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.button_kurangDari_notifikasiSparepart:
+                loadSparepartKurang();
+                break;
+            case R.id.button_lebihDari_notifikasiSparepart:
+                loadSparepartLebih();
+                break;
+        }
     }
 
     private void checkLoggedIn()
@@ -126,10 +143,15 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
         );
         llNotifikasiSparepart= findViewById(R.id.linearLayout_notifikasiSparepart);
         tableView= findViewById(R.id.tableView_sparepart);
+
+        btnKurang= findViewById(R.id.button_kurangDari_notifikasiSparepart);
+        btnKurang.setOnClickListener(this);
+        btnLebih= findViewById(R.id.button_lebihDari_notifikasiSparepart);
+        btnLebih.setOnClickListener(this);
     }
 
 
-    private void table()
+    private void table(String[][] list)
     {
         TableColumnPxWidthModel columnModel = new TableColumnPxWidthModel(4, 350);
         columnModel.setColumnWidth(0, 80);
@@ -139,7 +161,7 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
 
         tableView.setColumnModel(columnModel);
 //        tableView.setDataAdapter(new SimpleTableDataAdapter(this, listSparepartKurang));
-        SimpleTableDataAdapter stda= new SimpleTableDataAdapter(this, listSparepartKurang);
+        SimpleTableDataAdapter stda= new SimpleTableDataAdapter(this, list);
         stda.setTextSize(10);
         tableView.setDataAdapter(stda);
         SimpleTableHeaderAdapter stha= new SimpleTableHeaderAdapter(this, TABLE_HEADERS);
@@ -148,41 +170,6 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
 //        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, TABLE_HEADERS));
         tableView.setHeaderBackgroundColor(getResources().getColor(R.color.orange80));
 //        tableView.setWeightSum(1);
-    }
-
-    private void loadSparepartKurang()
-    {
-        Log.d(TAG, "onResponse: MASUK RETROFIT");
-        Retrofit.Builder builder= new Retrofit
-                .Builder()
-                .baseUrl(Helper.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        ApiClient apiClient= retrofit.create(ApiClient.class);
-
-        Call<List<SparepartDAO>> sparepartDAOCall= apiClient.getSparepartStokKurang();
-        sparepartDAOCall.enqueue(new Callback<List<SparepartDAO>>() {
-            @Override
-            public void onResponse(Call<List<SparepartDAO>> call, Response<List<SparepartDAO>> response) {
-                listSparepartKurang2= response.body();
-                if(listSparepartKurang2 != null)
-                {
-                    listSparepartKurang= new String[listSparepartKurang2.size()][4];
-                }
-                else
-                {
-                    listSparepartKurang= new String[1][4];
-                }
-                Log.d(TAG, "onResponse: BERHASIL LOAD SPAREPART KURANG DARI STOK MINIMAL");
-                assignList();
-                table();
-            }
-
-            @Override
-            public void onFailure(Call<List<SparepartDAO>> call, Throwable t) {
-                Log.d(TAG, "onFailure: GAGAL LOAD SPAREPART KURANG DARI STOK MINIMAL");
-            }
-        });
     }
 
     private void assignList()
@@ -207,6 +194,70 @@ public class NotificationSparepart extends AppCompatActivity implements SwipeRef
             listSparepartKurang[0][2]= ""; 
             listSparepartKurang[0][3]= ""; 
         }
+    }
+
+    private void loadSparepartKurang()
+    {
+        Retrofit.Builder builder= new Retrofit
+                .Builder()
+                .baseUrl(Helper.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit= builder.build();
+        ApiClient apiClient= retrofit.create(ApiClient.class);
+
+        Call<List<SparepartDAO>> sparepartDAOCall= apiClient.getSparepartStokKurang();
+        sparepartDAOCall.enqueue(new Callback<List<SparepartDAO>>() {
+            @Override
+            public void onResponse(Call<List<SparepartDAO>> call, Response<List<SparepartDAO>> response) {
+                listSparepartKurang2= response.body();
+                if(listSparepartKurang2 != null)
+                {
+                    listSparepartKurang= new String[listSparepartKurang2.size()][4];
+                }
+                else
+                {
+                    listSparepartKurang= new String[1][4];
+                }
+                assignList();
+                table(listSparepartKurang);
+            }
+
+            @Override
+            public void onFailure(Call<List<SparepartDAO>> call, Throwable t) {
+            }
+        });
+    }
+
+    private void loadSparepartLebih()
+    {
+        Retrofit.Builder builder= new Retrofit
+                .Builder()
+                .baseUrl(Helper.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit= builder.build();
+        ApiClient apiClient= retrofit.create(ApiClient.class);
+
+        Call<List<SparepartDAO>> sparepartDAOCall= apiClient.getSparepartStokLebih();
+        sparepartDAOCall.enqueue(new Callback<List<SparepartDAO>>() {
+            @Override
+            public void onResponse(Call<List<SparepartDAO>> call, Response<List<SparepartDAO>> response) {
+                listSparepartKurang2= response.body();
+                if(listSparepartKurang2 != null)
+                {
+                    listSparepartKurang= new String[listSparepartKurang2.size()][4];
+                }
+                else
+                {
+                    listSparepartKurang= new String[1][4];
+                }
+                assignList();
+                table(listSparepartKurang);
+            }
+
+            @Override
+            public void onFailure(Call<List<SparepartDAO>> call, Throwable t) {
+            }
+        });
     }
 
     private void referensi()

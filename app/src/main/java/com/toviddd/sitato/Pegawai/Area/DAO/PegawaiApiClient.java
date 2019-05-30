@@ -423,6 +423,12 @@ public interface PegawaiApiClient {
             @Path("id_pengadaan_sparepart") int id_pengadaan_sparepart
     );
 
+    @GET("pengadaanSparepart/indexEsok")
+    Call<List<TransaksiPengadaanDAO>> getTransaksiPengadaanEsok();
+
+    @GET("pengadaanSparepart/indexLampau")
+    Call<List<TransaksiPengadaanDAO>> getTransaksiPengadaanLampau();
+
 
 
 

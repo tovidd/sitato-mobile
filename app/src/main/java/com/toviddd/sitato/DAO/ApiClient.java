@@ -42,6 +42,9 @@ public interface ApiClient {
     @GET("sparepart/indexStokKurang")
     Call<List<SparepartDAO>> getSparepartStokKurang();
 
+    @GET("sparepart/indexStokLebih")
+    Call<List<SparepartDAO>> getSparepartStokLebih();
+
 
 
 
