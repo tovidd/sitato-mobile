@@ -371,4 +371,83 @@ public interface PegawaiApiClient {
             @Path("id_transaksi_penjualan_jasa_service") int id_transaksi_penjualan_jasa_service
     );
 
+
+
+
+
+
+
+
+
+
+
+
+    //    ======= pengadaan =========
+    @GET("pengadaanSparepart")
+    Call<List<TransaksiPengadaanDAO>> getAllTransaksiPengadaan();
+
+    @GET("pengadaanSparepart/{id_pengadaan_sparepart}")
+    Call<TransaksiPengadaanDAO> getTransaksiPengadaan(
+            @Path("id_pengadaan_sparepart") int id_pengadaan_sparepart
+    );
+
+    @POST("pengadaanSparepart")
+    @FormUrlEncoded
+    Call<TransaksiPengadaanDAO> requestSaveTransaksiPengadaan(
+            @Field("id_cabang") int id_cabang,
+            @Field("id_supplier") int id_supplier,
+            @Field("tanggal_pengadaan") String tanggal_pengadaan,
+            @Field("waktu_pengadaan") String waktu_pengadaan
+    );
+
+    @PUT("pengadaanSparepart/{id_pengadaan_sparepart}")
+    Call<String> requestUpdateTransaksiPengadaan(
+            @Body TransaksiPengadaanDAO transaksiPengadaanDAO,
+            @Path("id_pengadaan_sparepart") int id_pengadaan_sparepart
+    );
+
+    @DELETE("pengadaanSparepart/{id_pengadaan_sparepart}")
+    Call<String> deleteTransaksiPengadaan(
+            @Path("id_pengadaan_sparepart") int id_pengadaan_sparepart
+    );
+
+
+
+
+
+
+
+
+
+
+    //    ======= detil pengadaan =========
+    @GET("detilPengadaanSparepart")
+    Call<List<TransaksiPengadaanDetilDAO>> getAllTransaksiPengadaanDetil();
+
+    @GET("detilPengadaanSparepart/{id_pengadaan_sparepart}")
+    Call<List<TransaksiPengadaanDetilDAO>> getTransaksiPengadaanDetil(
+            @Path("id_pengadaan_sparepart") int id_pengadaan_sparepart
+    );
+
+    @POST("detilPengadaanSparepart")
+    @FormUrlEncoded
+    Call<TransaksiPengadaanDetilDAO> requestSaveTransaksiPengadaanDetil(
+            @Field("id_pengadaan_sparepart") int id_pengadaan_sparepart,
+            @Field("id_sparepart") int id_sparepart,
+            @Field("jumlah_beli_detil_pengadaan_sparepart") int jumlah_beli_detil_pengadaan_sparepart,
+            @Field("subtotal_detil_pengadaan_sparepart") double subtotal_detil_pengadaan_sparepart
+    );
+
+    @PUT("detilPengadaanSparepart/{id_detil_pengadaan_sparepart}")
+    Call<TransaksiPengadaanDetilDAO> requestUpdateTransaksiPengadaanDetil(
+            @Body TransaksiPengadaanDetilDAO transaksiPengadaanDetilDAO,
+            @Path("id_detil_pengadaan_sparepart") int id_detil_pengadaan_sparepart
+    );
+
+    @DELETE("detilPengadaanSparepart/{id_detil_pengadaan_sparepart}")
+    Call<String> deleteTransaksiPengadaanDetil(
+            @Path("id_detil_pengadaan_sparepart") int id_detil_pengadaan_sparepart
+    );
+
+
 }

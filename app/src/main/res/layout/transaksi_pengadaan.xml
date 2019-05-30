@@ -1,164 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pegawai.Area.transaksi.Transaksi_pengadaan">
+    tools:context=".Pegawai.Area.transaksi.Transaksi_pengadaan"
+    android:orientation="vertical">
 
-    <!--translationZ utk bring in front-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:translationZ="50dp"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/orange80"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_search" />
-                <EditText
-                    android:id="@+id/editText_searchSparepart_pengadaan"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="0.70"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white80"
-                    android:inputType="textFilter|text"
-                    android:hint="Pencarian.." />
-
-                <TextView
-                    android:id="@+id/textView_deleteSearchSparepart_pengadaan"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:textSize="15pt"
-                    android:textColor="@color/black"
-                    android:gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:text="X" />
-
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <!--hasil pencarian pelanggan-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView_SparepartSearch_pengadaan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
-
-    <!--ScroolView hanya bisa mempunyai 1 child, jika lebih maka error-->
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never">
 
-        <!--inputan pelanggan-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/editText_NamaSparepart_pengadaan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="Nama sparepart"
-                    android:inputType="text" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/editText_JumlahBeliSparepart_pengadaan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Jumlah beli sparepart"
-                    android:imeActionId="6"
-                    android:inputType="number" />
-            </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_horizontal|center_vertical"
-                android:orientation="horizontal">
+                android:padding="2sp"
+                android:background="@color/white80">
 
-                <Button
-                    android:id="@+id/btnKosongkanKolom"
-                    android:layout_width="120dp"
-                    android:layout_height="60dp"
-                    android:text="Kosongkan kolom"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="6"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnHapusSparepart_pengadaan"
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:text="Hapus"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView_namaSupplier_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textSize="6pt"
+                        android:hint="supplier"/>
 
-                <Button
-                    android:id="@+id/btnEditSparepart_pengadaan"
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:text="Ubah"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnSimpanSparepart_pengadaan"
-                    android:layout_width="80dp"
-                    android:layout_height="60dp"
-                    android:text="Simpan"
-                    android:textStyle="bold" />
-
+                    <Button
+                        android:id="@+id/button_namaSupplier_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="pilih"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="2sp"
+                android:background="@color/white80">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="6"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_tanggal_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textSize="6pt"
+                        android:hint="tanggal pengadaan"/>
+
+                    <Button
+                        android:id="@+id/button_tanggal_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="pilih"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="2sp"
+                android:background="@color/white80">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="6"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView_waktu_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textSize="6pt"
+                        android:hint="waktu pengadaan"/>
+
+                    <Button
+                        android:id="@+id/button_waktu_pengadaan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="pilih"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Daftar pengadaan sparepart"/>
+                android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_Sparepart_pengadaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="300dp"
-                android:layout_marginTop="5dp">
-
-            </android.support.v7.widget.RecyclerView>
-
-
+                <Button
+                    android:id="@+id/button_LanjutPengadaan_pengadaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:text="Lanjutkan pengadaan"/>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+</LinearLayout>

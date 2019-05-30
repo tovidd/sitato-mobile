@@ -258,19 +258,16 @@ public class Transaksi_jasaService extends AppCompatActivity {
         kendaraanDAOCall.enqueue(new Callback<List<KendaraanDAO>>() {
             @Override
             public void onResponse(Call<List<KendaraanDAO>> call, Response<List<KendaraanDAO>> response) {
-                Log.d(TAG, "=============================> onResponse: Berhasil getALLKendaraan" +response.body().size());
                 listKendaraan2= response.body();
                 for(int i= 0; i<listKendaraan2.size(); i++)
                 {
-                    String item= (listKendaraan2.get(i).getNo_plat_kendaraan() + " (" +listKendaraan2.get(i).getNama_pelanggan() +")").toString();
+                    String item= (listKendaraan2.get(i).getNo_plat_kendaraan() + " (" +listKendaraan2.get(i).getNama_pelanggan() +")");
                     listKendaraan.add(item);
-                    Log.d(TAG, "===================================> onResponse kendaraan: "+listKendaraan2.get(i).getNo_plat_kendaraan());
                 }
             }
 
             @Override
             public void onFailure(Call<List<KendaraanDAO>> call, Throwable t) {
-                Log.d(TAG, "=============================> onResponse: Gagal getALLKendaraan" +t.getMessage());
             }
         });
 
@@ -279,7 +276,6 @@ public class Transaksi_jasaService extends AppCompatActivity {
             public void onClick(View v) {
                 if(listKendaraan.size() > 0)
                 {
-                    Log.d(TAG, "-0-0-0-0-0-0--0-0-0-0-0-0-0-0-0-0 setKendaraanAndSpinner: sett.......platKendaraan spiner");
                     spinnerDialogKendaraan= new SpinnerDialog(Transaksi_jasaService.this, listKendaraan, "Pilih kendaraan", "Tutup");
                     spinnerDialogKendaraan.bindOnSpinerListener(new OnSpinerItemClick() {
                         @Override
@@ -290,7 +286,10 @@ public class Transaksi_jasaService extends AppCompatActivity {
                         }
                     });
                 }
-                spinnerDialogKendaraan.showSpinerDialog();
+                try
+                {
+                    spinnerDialogKendaraan.showSpinerDialog();
+                }catch(Exception e){}
             }
         });
     }
@@ -310,7 +309,6 @@ public class Transaksi_jasaService extends AppCompatActivity {
                     for(int i= 0; i<listMontir2.size(); i++)
                     {
                         listMontir.add(listMontir2.get(i).getNama_pegawai());
-                        Log.d(TAG, "===================================> onResponse kendaraan: "+listMontir2.get(i).getNama_pegawai());
                     }
                 }
             }
@@ -326,7 +324,6 @@ public class Transaksi_jasaService extends AppCompatActivity {
             public void onClick(View v) {
                 if(listMontir.size() > 0)
                 {
-                    Log.d(TAG, "-0-0-0-0-0-0--0-0-0-0-0-0-0-0-0-0 setMontirAndSpinner: sett.......montir spiner");
                     spinnerDialogMontir= new SpinnerDialog(Transaksi_jasaService.this, listMontir, "Pilih montir", "Tutup");
                     spinnerDialogMontir.bindOnSpinerListener(new OnSpinerItemClick() {
                         @Override
@@ -336,7 +333,10 @@ public class Transaksi_jasaService extends AppCompatActivity {
                         }
                     });
                 }
-                spinnerDialogMontir.showSpinerDialog();
+                try
+                {
+                    spinnerDialogMontir.showSpinerDialog();
+                }catch(Exception e){}
             }
         });
     }

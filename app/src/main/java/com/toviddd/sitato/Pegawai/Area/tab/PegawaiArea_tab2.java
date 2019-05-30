@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,27 +25,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.toviddd.sitato.DAO.PegawaiDAO;
 import com.toviddd.sitato.Helper;
 import com.toviddd.sitato.Pegawai.Area.DAO.PegawaiApiClient;
 import com.toviddd.sitato.Pegawai.Area.DAO.PelangganDAO;
-import com.toviddd.sitato.Pegawai.Area.DAO.SparepartDAO;
 import com.toviddd.sitato.Pegawai.Area.DAO.TransaksiDAO;
-import com.toviddd.sitato.Pegawai.Area.DAO.TransaksiSparepartDAO;
-import com.toviddd.sitato.Pegawai.Area.Kelola.data.Pelanggan;
-import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterPelangganSearch;
-import com.toviddd.sitato.Pegawai.Area.PegawaiMainActivity;
 import com.toviddd.sitato.Pegawai.Area.transaksi.RecyclerAdapter.RecyclerAdapterPelangganTransaksiSearch;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_menu;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_pengadaan;
+import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_pengadaan_detil;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_tampil;
 import com.toviddd.sitato.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
