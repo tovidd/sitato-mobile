@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +53,9 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
     private List<SupplierDAO> listSupplier2= new ArrayList<>();
     private int id_pengadaan_sparepart, id_supplier;
     private String tanggal_pengadaan, waktu_pengadaan;
+
+    // tampil pengadaan
+    private FloatingActionButton fab_tampilPengadaan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,9 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.button_LanjutPengadaan_pengadaan:
                 actionLanjutkan();
+                break;
+            case R.id.fab_tampilPengadaan:
+                actionFab();
                 break;
         }
     }
@@ -148,6 +155,10 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
         btnTanggal.setOnClickListener(this);
         btnWaktu.setOnClickListener(this);
         btnLanjutkan.setOnClickListener(this);
+
+        // fab
+        fab_tampilPengadaan= findViewById(R.id.fab_tampilPengadaan);
+        fab_tampilPengadaan.setOnClickListener(this);
     }
 
     private void actionNamaSupplier()
@@ -169,11 +180,10 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
                                 if(item.equalsIgnoreCase(item2))
                                 {
                                     id_supplier= listSupplier2.get(i).getId_supplier();
-                                    Log.d(TAG, "item == item2 ===> " +id_supplier);
                                 }
                                 else
                                 {
-                                    Log.d(TAG +"\n", "item != item2 ===> " +item +", " +item2);
+                                    //
                                 }
                             }
                         }
@@ -261,7 +271,7 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
         SharedPreferences prefLogin = getApplicationContext().getSharedPreferences(Helper.PREF_LOGIN_PEGAWAI, getApplicationContext().MODE_PRIVATE);
         int id_cabang = prefLogin.getInt(Helper.ID_CABANG_LOGIN, -1);
         Log.d(TAG, "///////////////////////////// actionLanjutkan: " +id_cabang);
-        if(String.valueOf(id_cabang) != null && String.valueOf(id_supplier) != null && !tanggal_pengadaan.isEmpty() && !waktu_pengadaan.isEmpty())
+        if(String.valueOf(id_cabang) != null && String.valueOf(id_supplier) != null && tanggal_pengadaan != null && waktu_pengadaan != null)
         {
             Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit= builder.build();
@@ -304,6 +314,11 @@ public class Transaksi_pengadaan extends AppCompatActivity implements View.OnCli
         }
 
 
+    }
+
+    private void actionFab()
+    {
+        startActivity(new Intent(Transaksi_pengadaan.this, Transaksi_pengadaan_tampil.class));
     }
 
     private void loadSupplier()

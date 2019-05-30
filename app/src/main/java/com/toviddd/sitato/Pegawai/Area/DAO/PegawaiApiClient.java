@@ -371,6 +371,18 @@ public interface PegawaiApiClient {
             @Path("id_transaksi_penjualan_jasa_service") int id_transaksi_penjualan_jasa_service
     );
 
+    @POST("transaksiPenjualanJasaService/ubahStatus")
+    @FormUrlEncoded
+    Call<TransaksiJasaServiceDAO> ubahStatusJasaService(
+            @Field("id_transaksi_penjualan_jasa_service") int id_transaksi_penjualan_jasa_service
+    );
+
+    @GET("transaksiPenjualanJasaService/indexBelumSelesai")
+    Call<List<TransaksiJasaServiceDAO>> getTransaksiJasaServiceBelumSelesai();
+
+    @GET("transaksiPenjualanJasaService/indexSelesai")
+    Call<List<TransaksiJasaServiceDAO>> getTransaksiJasaServiceSelesai();
+
 
 
 

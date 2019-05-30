@@ -37,6 +37,7 @@ import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_menu;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_pengadaan;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_pengadaan_detil;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_tampil;
+import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_tampil_jasa_service;
 import com.toviddd.sitato.R;
 
 import java.util.ArrayList;
@@ -57,8 +58,8 @@ public class PegawaiArea_tab2 extends Fragment implements View.OnClickListener {
     private String TAG= "Pegawai Area Tab 2";
     private String namaKelas= "transaksi";
     private FloatingActionButton fab_tampilTransaksi;
-    private TextView tvFabTransaksi, tvFabPengadaan;
-    private LinearLayout llFabTransaksi, llFabPengadaan;
+    private TextView tvFabTransaksi, tvFabPengadaan, tvFabTransaksiJasa;
+    private LinearLayout llFabTransaksi, llFabPengadaan, llFabTransaksiJasa;
     Boolean isFABOpen= false;
 
     // cari
@@ -85,16 +86,22 @@ public class PegawaiArea_tab2 extends Fragment implements View.OnClickListener {
 
     private void showFABMenu(){
         isFABOpen= true;
-        llFabTransaksi.animate().translationY(-getResources().getDimension(R.dimen.standard_75));
-        llFabPengadaan.animate().translationY(-getResources().getDimension(R.dimen.standard_145));
+        llFabTransaksiJasa.animate().translationY(-getResources().getDimension(R.dimen.standard_65));
+        llFabTransaksi.animate().translationY(-getResources().getDimension(R.dimen.standard_125));
+        llFabPengadaan.animate().translationY(-getResources().getDimension(R.dimen.standard_185));
+
+        tvFabTransaksiJasa.setVisibility(View.VISIBLE);
         tvFabTransaksi.setVisibility(View.VISIBLE);
         tvFabPengadaan.setVisibility(View.VISIBLE);
     }
 
     private void closeFABMenu(){
         isFABOpen= false;
+        llFabTransaksiJasa.animate().translationY(0);
         llFabTransaksi.animate().translationY(0);
         llFabPengadaan.animate().translationY(0);
+
+        tvFabTransaksiJasa.setVisibility(View.INVISIBLE);
         tvFabTransaksi.setVisibility(View.INVISIBLE);
         tvFabPengadaan.setVisibility(View.INVISIBLE);
     }
@@ -121,6 +128,11 @@ public class PegawaiArea_tab2 extends Fragment implements View.OnClickListener {
     private void fabPengadaan()
     {
         startActivity(new Intent(getContext(), Transaksi_pengadaan.class));
+    }
+
+    private void fabTransaksiJasa()
+    {
+        startActivity(new Intent(getContext(), Transaksi_tampil_jasa_service.class));
     }
 
     @Override
@@ -155,6 +167,9 @@ public class PegawaiArea_tab2 extends Fragment implements View.OnClickListener {
                 break;
             case R.id.linearLayout_fabPengadaan:
                 fabPengadaan();
+                break;
+            case R.id.linearLayout_fabTransaksiJasa:
+                fabTransaksiJasa();
                 break;
         }
     }
@@ -208,8 +223,11 @@ public class PegawaiArea_tab2 extends Fragment implements View.OnClickListener {
         llFabTransaksi.setOnClickListener(this);
         llFabPengadaan= rootView.findViewById(R.id.linearLayout_fabPengadaan);
         llFabPengadaan.setOnClickListener(this);
+        llFabTransaksiJasa= rootView.findViewById(R.id.linearLayout_fabTransaksiJasa);
+        llFabTransaksiJasa.setOnClickListener(this);
         tvFabTransaksi= rootView.findViewById(R.id.textView_fabTransaksi);
         tvFabPengadaan= rootView.findViewById(R.id.textView_fabPengadaan);
+        tvFabTransaksiJasa= rootView.findViewById(R.id.textView_fabTransaksiJasa);
     }
 
     public void transaksiMenu()

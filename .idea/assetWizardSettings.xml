@@ -137,7 +137,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/notification/ic_do_not_disturb_alt_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_motorcycle_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -147,7 +147,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_not" />
+                            <entry key="outputName" value="ic_motor" />
                             <entry key="sourceFile" value="C:\Users\ASUS\Desktop\ic_logo_atma_auto.psd" />
                           </map>
                         </option>

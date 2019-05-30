@@ -32,10 +32,11 @@ public class RecyclerAdapterHistoriTransaksiTab3ListJasaService extends Recycler
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView namaJS, kendaraanJS, kodeJS, jumlahBeliJS, subtotalJS, montirJS;
+        private TextView statusJS, namaJS, kendaraanJS, kodeJS, jumlahBeliJS, subtotalJS, montirJS;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            statusJS= itemView.findViewById(R.id.texView_statusJasaService_detilHistoriTransaksi);
             namaJS= itemView.findViewById(R.id.texView_namaJasaService_detilHistoriTransaksi);
             kendaraanJS= itemView.findViewById(R.id.texView_kendaraanJasaService_detilHistoriTransaksi);
             kodeJS= itemView.findViewById(R.id.texView_kodeJasaService_detilHistoriTransaksi);
@@ -63,6 +64,7 @@ public class RecyclerAdapterHistoriTransaksiTab3ListJasaService extends Recycler
     public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
         final TransaksiJasaServiceDAO tjsDAO= result.get(i);
         //Log.d(TAG, "-----------------------> onCreate lisSparepart sebelum createObject: " +result.get(i).getNama_sparepart());
+        myViewHolder.statusJS.setText(tjsDAO.getNama_status_pengerjaan());
         myViewHolder.namaJS.setText(tjsDAO.getNama_jasa_service());
         myViewHolder.kendaraanJS.setText(tjsDAO.getMerek_kendaraan() +" " +tjsDAO.getJenis_kendaraan());
         if(tjsDAO.getKode_jasa_service() < 10)

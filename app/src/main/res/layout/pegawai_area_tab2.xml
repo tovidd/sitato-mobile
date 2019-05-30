@@ -377,6 +377,41 @@
                 android:src="@mipmap/ic_transaksi" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout_fabTransaksiJasa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="@dimen/standard_21"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_fabTransaksiJasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:visibility="invisible"
+                android:textSize="9pt"
+                android:textColor="@color/black"
+                android:text="Transaksi jasa"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="     "/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_transaksiJasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/white"
+                android:src="@mipmap/ic_jasa_service" />
+        </LinearLayout>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_tampilTransaksi"
             android:layout_width="wrap_content"

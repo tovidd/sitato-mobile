@@ -102,6 +102,42 @@
                             android:layout_marginBottom="5dp"
                             android:layout_gravity="center"
                             android:backgroundTint="@color/blue50"
+                            android:background="@drawable/ic_info"/>
+
+                        <TextView
+                            android:id="@+id/texView_statusJasaService_detilHistoriTransaksi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/black80"
+                            android:textSize="7pt"
+                            android:text="status jasa service"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white80"
+                    android:layout_marginTop="-2sp"
+                    android:padding="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/blue50"
                             android:background="@mipmap/ic_kendaraan"/>
 
                         <TextView
