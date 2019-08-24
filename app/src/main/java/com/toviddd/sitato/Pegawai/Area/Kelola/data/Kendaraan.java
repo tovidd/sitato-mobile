@@ -29,12 +29,15 @@ import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdap
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterKendaraanSearch;
 import com.toviddd.sitato.Pegawai.Area.Kelola.data.Recycler.adapter.RecyclerAdapterPelanggan;
 import com.toviddd.sitato.Pegawai.Area.PegawaiMainActivity;
+import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_jasaService;
 import com.toviddd.sitato.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,9 +46,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Kendaraan extends AppCompatActivity implements View.OnClickListener {
 
-    private Button kosongkanKolom, hapus, ubah, simpan;
-    private EditText noPlatKendaraan, merekKendaraan, jenisKendaraan, idPelangganKendaraan;
-    private TextView deleteSearchKendaraan;
+    private Button kosongkanKolom, hapus, ubah, simpan, btnPilihPelanggan;
+    private EditText noPlatKendaraan, merekKendaraan, jenisKendaraan;
+    private TextView deleteSearchKendaraan, tvPilihPelanggan;
     private String TAG= "Kendaraan Activity";
     private String namaKelas= "kendaraan";
     private List<KendaraanDAO> listKendaraan= new ArrayList<>();
@@ -55,14 +58,16 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
     private static final int PICK_IMAGE = 100;
     public static final String PREF_KENDARAAN= "PREF_KENDARAAN";
     public int id_kendaraan;
-    private int status_idPelanggan= 0;
     // search bar
     private RecyclerView recyclerViewSearch;
     private RecyclerAdapterKendaraanSearch recyclerAdapterKendaraanSearch;
     private EditText searchKendaraan;
-    // recycler view id pelanggan
+    // spinner
     private RecyclerAdapterPelanggan recyclerAdapterPelanggan;
-    private List<PelangganDAO> listPelanggan= new ArrayList<>();
+    private List<PelangganDAO> listPelanggann= new ArrayList<>();
+    private ArrayList<String> listPelanggann2= new ArrayList<>();
+    private SpinnerDialog spinnerDialogPelanggan;
+    private int id_pelanggan= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,8 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
         tampil();
         buildRecyclerViewSearch();
         cari();
+        isiKolom();
+        setPelangganAndSpinner();
     }
 
     @Override
@@ -131,7 +138,10 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
         noPlatKendaraan= findViewById(R.id.editText_NoPlatKendaraan);
         merekKendaraan= findViewById(R.id.editText_MerekKendaraan);
         jenisKendaraan= findViewById(R.id.editText_JenisKendaraan);
-        idPelangganKendaraan= findViewById(R.id.editText_IdPelangganKendaraan);
+
+        // spinner
+        btnPilihPelanggan= findViewById(R.id.button_namaPelangganKendaraan);
+        tvPilihPelanggan= findViewById(R.id.textView_namaPelangganKendaraan);
     }
 
     public void buildRecyclerViewTampil()
@@ -153,18 +163,9 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
         recyclerViewSearch.setItemAnimator(new DefaultItemAnimator());
     }
 
-    public void buildRecyclerViewSearchIdPelanggan()
-    {
-        recyclerViewSearch= findViewById(R.id.recyclerView_KendaraanSearch);
-        recyclerAdapterPelanggan= new RecyclerAdapterPelanggan(this, listPelanggan);
-        RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext());
-        recyclerViewSearch.setLayoutManager(mLayoutManager);
-        recyclerViewSearch.setItemAnimator(new DefaultItemAnimator());
-    }
-
     public void kosongkanKolom()
     {
-        idPelangganKendaraan.setText("");
+        tvPilihPelanggan.setText("");
         noPlatKendaraan.setText("");
         merekKendaraan.setText("");
         jenisKendaraan.setText("");
@@ -173,9 +174,9 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
 
     public void isiKolom()
     {
-        noPlatKendaraan.setText("AAA");
-        merekKendaraan.setText("123");
-        jenisKendaraan.setText("AAA");
+        noPlatKendaraan.setText("AA1234GB");
+        merekKendaraan.setText("Yamaha");
+        jenisKendaraan.setText("MX 3000");
     }
 
     private boolean isNetworkAvailable()
@@ -183,6 +184,50 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
         ConnectivityManager connectivityManager= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return (activeNetworkInfo != null && activeNetworkInfo.isConnected());
+    }
+
+    private void setPelangganAndSpinner()
+    {
+        Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit= builder.build();
+        PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
+        Call<List<PelangganDAO>> pDAOCall= apiClient.getAllPelanggan();
+        pDAOCall.enqueue(new Callback<List<PelangganDAO>>() {
+            @Override
+            public void onResponse(Call<List<PelangganDAO>> call, Response<List<PelangganDAO>> response) {
+                listPelanggann= response.body();
+                for(int i= 0; i<listPelanggann.size(); i++)
+                {
+                    String item= (listPelanggann.get(i).getNama_pelanggan() + " (" +listPelanggann.get(i).getNo_telepon_pelanggan() +")");
+                    listPelanggann2.add(item);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PelangganDAO>> call, Throwable t) {
+            }
+        });
+
+        btnPilihPelanggan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listPelanggann.size() > 0)
+                {
+                    spinnerDialogPelanggan= new SpinnerDialog(Kendaraan.this, listPelanggann2, "Pilih pelanggan", "Tutup");
+                    spinnerDialogPelanggan.bindOnSpinerListener(new OnSpinerItemClick() {
+                        @Override
+                        public void onClick(String item, int position) {
+                            tvPilihPelanggan.setText(item);
+                            id_pelanggan= position+1;
+                        }
+                    });
+                }
+                try
+                {
+                    spinnerDialogPelanggan.showSpinerDialog();
+                }catch(Exception e){}
+            }
+        });
     }
 
     public void hapus()
@@ -244,11 +289,9 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
     public void ubah()
     {
         String noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung;
-        int idPelangganKendaraan_tampung;
         noPlatKendaraan_tampung= noPlatKendaraan.getText().toString();
         merekKendaraan_tampung= merekKendaraan.getText().toString();
         jenisKendaraan_tampung= jenisKendaraan.getText().toString();
-        idPelangganKendaraan_tampung= Integer.parseInt(idPelangganKendaraan.getText().toString());
 
         // get id kendaraan
         SharedPreferences pref= getApplicationContext().getSharedPreferences(PREF_KENDARAAN, Context.MODE_PRIVATE);
@@ -285,11 +328,10 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
             }
             else
             {
-                //POST data into API ,,Build retrofit
                 Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
                 Retrofit retrofit= builder.build();
                 PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-                KendaraanDAO sp= new KendaraanDAO(idPelangganKendaraan_tampung, noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung);
+                KendaraanDAO sp= new KendaraanDAO(id_pelanggan, noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung);
 
                 id_kendaraan= s.getId_kendaraan();
                 Call<String> kendaraanDAOCall= apiClient.requestUpdateKendaraan(sp, id_kendaraan);
@@ -325,12 +367,9 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
     public void simpan()
     {
         String noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung;
-        int idPelangganKendaraan_tampung;
         noPlatKendaraan_tampung= noPlatKendaraan.getText().toString();
         merekKendaraan_tampung= merekKendaraan.getText().toString();
         jenisKendaraan_tampung= jenisKendaraan.getText().toString();
-        idPelangganKendaraan_tampung= Integer.parseInt(idPelangganKendaraan.getText().toString());
-
 
         if(noPlatKendaraan_tampung.isEmpty() || merekKendaraan_tampung.isEmpty() || jenisKendaraan_tampung.isEmpty())
         {
@@ -355,27 +394,7 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
         }
         else
         {
-            Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-            Retrofit retrofit= builder.build();
-            PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-            Call<PelangganDAO> pDAOCall= apiClient.getPelanggan(idPelangganKendaraan_tampung);
-            pDAOCall.enqueue(new Callback<PelangganDAO>() {
-                @Override
-                public void onResponse(Call<PelangganDAO> call, Response<PelangganDAO> response) {
-                    if(response.body() != null)
-                    {
-                        status_idPelanggan= 1;
-                    }
-                    Log.d(TAG, "================> onResponse: MASUK KE STATUS ID PELANGGAN " );
-                }
-
-                @Override
-                public void onFailure(Call<PelangganDAO> call, Throwable t) {
-
-                }
-            });
-
-            if(status_idPelanggan == 0)
+            if(id_pelanggan == 0)
             {
                 FancyToast.makeText(Kendaraan.this, "Id Pelanggan tidak tersedia", FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
             }
@@ -385,7 +404,7 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
                 Retrofit.Builder builder2= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
                 Retrofit retrofit2= builder2.build();
                 PegawaiApiClient apiClient2= retrofit2.create(PegawaiApiClient.class);
-                Call<String> kendaraanDAOCall= apiClient2.requestSaveKendaraan(idPelangganKendaraan_tampung, noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung);
+                Call<String> kendaraanDAOCall= apiClient2.requestSaveKendaraan(id_pelanggan, noPlatKendaraan_tampung, merekKendaraan_tampung, jenisKendaraan_tampung);
 
                 kendaraanDAOCall.enqueue(new Callback<String>() {
                     @Override
@@ -414,7 +433,6 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
                 });
             }
         }
-        status_idPelanggan= 0;
     }
 
     public void tampil()
@@ -508,6 +526,7 @@ public class Kendaraan extends AppCompatActivity implements View.OnClickListener
 
         if(s != null)
         {
+            tvPilihPelanggan.setText(s.getNama_pelanggan());
             noPlatKendaraan.setText(s.getNo_plat_kendaraan());
             merekKendaraan.setText(s.getMerek_kendaraan());
             jenisKendaraan.setText(s.getJenis_kendaraan());

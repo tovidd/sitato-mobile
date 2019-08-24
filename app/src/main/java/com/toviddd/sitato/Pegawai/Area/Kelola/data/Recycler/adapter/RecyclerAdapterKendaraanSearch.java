@@ -66,35 +66,19 @@ public class RecyclerAdapterKendaraanSearch extends RecyclerView.Adapter<Recycle
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position)  {
         final KendaraanDAO kendaraanDAO= listKendaraan.get(position);
 
-        Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-        Call<PelangganDAO> sDAO= apiClient.getPelanggan(kendaraanDAO.getId_pelanggan());
-        sDAO.enqueue(new Callback<PelangganDAO>() {
-            @Override
-            public void onResponse(Call<PelangganDAO> call, Response<PelangganDAO> response) {
-                myViewHolder.noPlatKendaraan.setText(kendaraanDAO.getNo_plat_kendaraan() +"(" +response.body().getNama_pelanggan() +")");
-                myViewHolder.merekKendaraan.setText(kendaraanDAO.getMerek_kendaraan());
-                myViewHolder.jenisKendaraan.setText(kendaraanDAO.getJenis_kendaraan());
-            }
-
-            @Override
-            public void onFailure(Call<PelangganDAO> call, Throwable t) {
-
-            }
-        });
+        myViewHolder.noPlatKendaraan.setText(kendaraanDAO.getNo_plat_kendaraan() +"(" +kendaraanDAO.getNama_pelanggan() +")");
+        myViewHolder.merekKendaraan.setText(kendaraanDAO.getMerek_kendaraan());
+        myViewHolder.jenisKendaraan.setText(kendaraanDAO.getJenis_kendaraan());
 
         myViewHolder.noPlatKendaraan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // shared preferences
-            KendaraanDAO p= new KendaraanDAO(kendaraanDAO.getId_pelanggan(), kendaraanDAO.getId_kendaraan(), kendaraanDAO.getNo_plat_kendaraan(), kendaraanDAO.getMerek_kendaraan(), kendaraanDAO.getJenis_kendaraan(), kendaraanDAO.getCreated_at());
-            SharedPreferences pref= context.getSharedPreferences(PREF_KENDARAAN, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor= pref.edit();
-            Gson gson= new Gson();
-            String json= gson.toJson(p);
-            editor.putString(PREF_KENDARAAN, json);
-            editor.commit();
+                SharedPreferences pref= context.getSharedPreferences(PREF_KENDARAAN, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor= pref.edit();
+                Gson gson= new Gson();
+                String json= gson.toJson(kendaraanDAO);
+                editor.putString(PREF_KENDARAAN, json);
+                editor.commit();
             }
         });
 

@@ -467,5 +467,12 @@ public interface PegawaiApiClient {
             @Path("id_detil_pengadaan_sparepart") int id_detil_pengadaan_sparepart
     );
 
+    @POST("detilPengadaanSparepart/perbaharuiBarangMasuk")
+    @FormUrlEncoded
+    Call<TransaksiPengadaanDetilDAO> perbahruiBarangMasukTransaksiPengadaanDetil(
+            @Field("id_detil_pengadaan_sparepart") int id_detil_pengadaan_sparepart,
+            @Field("jumlah_barang_datang_pengadaan_sparepart") int jumlah_barang_datang_pengadaan_sparepart
+    );
+
 
 }

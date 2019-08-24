@@ -11,10 +11,10 @@ import com.toviddd.sitato.DAO.PegawaiDAO;
 import com.toviddd.sitato.Pegawai.Area.DAO.SparepartDAO;
 
 public class Helper {
+//    public static String BASE_URL= "http://192.168.43.104:8000/api/";
+//    public static String BASE_URL_IMAGE= "http://192.168.43.104:8000/files/";
     public static String BASE_URL= "http://192.168.43.104:8000/api/";
     public static String BASE_URL_IMAGE= "http://192.168.43.104:8000/files/";
-//    public static String BASE_URL= "http://192.168.19.140/8839/api/";
-//    public static String BASE_URL_IMAGE= "http://192.168.19.140/8839/files/";
 
     public static final String PREF_TRANSAKSI= "PREF_TRANSAKSI";
     public static final String PREF_TRANSAKSI_SPAREPART= "PREF_TRANSAKSI_SPAREPART";

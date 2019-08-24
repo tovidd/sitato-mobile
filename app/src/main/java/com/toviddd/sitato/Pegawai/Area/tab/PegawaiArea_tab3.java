@@ -39,22 +39,22 @@ public class PegawaiArea_tab3 extends Fragment implements View.OnClickListener {
                 actionSparepartKurang();
                 break;
             case R.id.linearLayout_SparepartTerlaris_Laporan:
-                actionWeb("http://google.com");
+                actionWeb("http://192.168.19.140/8847/sitato/laporan/laporan_terlaris");
                 break;
             case R.id.linearLayout_PendapatanBulanan_Laporan:
-                actionWeb("http://facebook.com");
+                actionWeb("http://192.168.19.140/8847/sitato/laporan/laporan_pendapatan");
                 break;
             case R.id.linearLayout_PendapatanTahunan_Laporan:
-                actionWeb("https://www.w3schools.com/");
+                actionWeb("http://192.168.19.140/8847/sitato/laporan/laporan_pendapatan_tahun");
                 break;
             case R.id.linearLayout_PengeluaranBulanan_Laporan:
-                actionWeb("http://github.com");
+                actionWeb("http://192.168.19.140/8847/sitato/laporan/laporan_pengeluaran");
                 break;
             case R.id.linearLayout_PenjualanJasa_Laporan:
-                actionWeb("http://whatsapp.com");
+                actionWeb("http://192.168.19.140/8847/sitato/cetak/laporan_penjualan_jasa");
                 break;
             case R.id.linearLayout_SisaStok_Laporan:
-                actionWeb("https://stackoverflow.com");
+                actionWeb("http://192.168.19.140/8847/sitato/cetak/sisa_stok");
         }
     }
 

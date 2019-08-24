@@ -22,6 +22,7 @@ import com.toviddd.sitato.Pegawai.Area.DAO.PegawaiApiClient;
 import com.toviddd.sitato.Pegawai.Area.DAO.TransaksiDAO;
 import com.toviddd.sitato.Pegawai.Area.DAO.TransaksiPengadaanDAO;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_menu;
+import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_pengadaan_tampil_detil;
 import com.toviddd.sitato.Pegawai.Area.transaksi.Transaksi_tampil;
 import com.toviddd.sitato.R;
 
@@ -85,13 +86,15 @@ public class RecyclerAdapterTransaksiPengadaanTampil extends RecyclerView.Adapte
 
         myViewHolder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            public void onCreateContextMenu(ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("Pilih aksi");
                 //groupId, itemId, order, title
                 menu.add(0, v.getId(), 0, "Detail").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        //
+                        Intent i= new Intent(v.getContext(), Transaksi_pengadaan_tampil_detil.class);
+                        i.putExtra("id_pengadaan_sparepart", tpDAO.getId_pengadaan_sparepart());
+                        v.getContext().startActivity(i);
                         return true;
                     }
                 });

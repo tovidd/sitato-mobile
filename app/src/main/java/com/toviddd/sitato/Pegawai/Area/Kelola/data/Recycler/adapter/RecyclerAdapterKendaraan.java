@@ -59,28 +59,9 @@ public class RecyclerAdapterKendaraan extends RecyclerView.Adapter<RecyclerAdapt
     public void onBindViewHolder(final MyViewHolder myViewHolder, int i) {
         final KendaraanDAO kendaraanDAO= result.get(i);
 
-        Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Helper.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        PegawaiApiClient apiClient= retrofit.create(PegawaiApiClient.class);
-        Call<PelangganDAO> sDAO= apiClient.getPelanggan(kendaraanDAO.getId_pelanggan());
-        sDAO.enqueue(new Callback<PelangganDAO>() {
-            @Override
-            public void onResponse(Call<PelangganDAO> call, Response<PelangganDAO> response) {
-                if(response.body() != null)
-                {
-                    // PERBAIKI KALO PELANGGA DI HAPUS ADAPTER NYA YANG KOSONG< ITU DIHILANGIN
-                    myViewHolder.noPlatKendaraan.setText(kendaraanDAO.getNo_plat_kendaraan() +"(" +response.body().getNama_pelanggan() +")");
-                    myViewHolder.merekKendaraan.setText(kendaraanDAO.getMerek_kendaraan());
-                    myViewHolder.jenisKendaraan.setText(kendaraanDAO.getJenis_kendaraan());
-                    Log.d(TAG, "ooooooooooooooooooooooooo>>> onBindViewHolder: " +response.body().getNama_pelanggan());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PelangganDAO> call, Throwable t) {
-                Log.d(TAG, "ooooooooooooooooooooooooo>>> onBindViewHolder: ERRRROR ");
-            }
-        });
+        myViewHolder.noPlatKendaraan.setText(kendaraanDAO.getNo_plat_kendaraan() +"(" +kendaraanDAO.getNama_pelanggan() +")");
+        myViewHolder.merekKendaraan.setText(kendaraanDAO.getMerek_kendaraan());
+        myViewHolder.jenisKendaraan.setText(kendaraanDAO.getJenis_kendaraan());
     }
 
     @Override

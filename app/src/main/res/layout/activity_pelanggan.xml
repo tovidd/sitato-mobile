@@ -102,7 +102,7 @@
                     android:ems="10"
                     android:hint="Nomor telpon pelanggan"
                     android:imeActionId="6"
-                    android:inputType="number" />
+                    android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
